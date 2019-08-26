@@ -1,18 +1,19 @@
 <template>
   <div id="app">
-   <!-- <landingPage></landingPage> -->
-   <supadmin></supadmin>
+   <!-- <supadmin></supadmin> > -->
+  <landingPage></landingPage>
+
   </div>
 </template>
 
 <script>
-//
-import supadmin from "./components/supadmin";
+import landingPage from "./components/landingPage";
+//import supadmin from "./components/supadmin";
 export default {
   name: "App",
   components: {
-   // landingPage
-   supadmin 
+    landingPage
+   //supadmin 
   },
   data: () => ({
     //
@@ -26,7 +27,7 @@ body {
   height: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
-  background-color: rgb(248, 248, 248);
+  background-color: #FAFAFA;
 }
 *,
 *::after,

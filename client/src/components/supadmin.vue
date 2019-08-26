@@ -152,13 +152,13 @@ export default {
      .title{
            color: #fff;
            font-size: 2rem !important;
+           margin-left: 1rem;
      }
 
      .mx-3{
          position: relative;
          left : -1.9rem;
-         top: .1rem;
-         font-size: 17px;
+         font-size: 23px;
      }
 
 }
