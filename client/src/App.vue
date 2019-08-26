@@ -1,25 +1,30 @@
 <template>
   <div id="app">
-   <!-- <supadmin></supadmin> > -->
-  <landingPage></landingPage>
+   <!-- <landingPage></landingPage>-->
+   <supadmin></supadmin>
+  
 
   </div>
 </template>
 
 <script>
-import landingPage from "./components/landingPage";
-//import supadmin from "./components/supadmin";
+//import landingPage from "./components/landingPage";
+import supadmin from "./components/supadmin";
 export default {
   name: "App",
   components: {
-    landingPage
-   //supadmin 
+    //landingPage
+   supadmin 
   },
   data: () => ({
     //
   })
 };
 </script>
+
+//Todo Make a better logo 
+
+
 <style >
 html,
 body {
