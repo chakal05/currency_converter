@@ -1,27 +1,25 @@
 <template>
   <div id="app">
-    <tete></tete>
-    <!--  <landingPage  />
-    <supadmin></supadmin>-->
+   <!-- <landingPage></landingPage> -->
+   <supadmin></supadmin>
   </div>
 </template>
 
 <script>
-//import landingPage from "./components/landingPage.vue";
-//import supadmin from "./components/supadmin.vue";
-import tete from "./components/header.vue";
-
+//
+import supadmin from "./components/supadmin";
 export default {
-  name: "app",
+  name: "App",
   components: {
-    tete
-    // landingPage
-    //supadmin
-  }
+   // landingPage
+   supadmin 
+  },
+  data: () => ({
+    //
+  })
 };
 </script>
-
-<style>
+<style >
 html,
 body {
   width: 100%;
