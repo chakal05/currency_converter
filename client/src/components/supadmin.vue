@@ -32,7 +32,9 @@
                   <v-icon>{{ child.icon }}</v-icon>
                 </v-list-item-action>
                 <v-list-item-content>
-                  <v-list-item-title>{{ child.text }}</v-list-item-title>
+                  <a href="#">
+                    <v-list-item-title>{{ child.text }}</v-list-item-title>
+                  </a>
                 </v-list-item-content>
               </v-list-item>
             </v-list-group>
@@ -54,12 +56,13 @@
           <span class="title">Manedek</span>
         </v-toolbar-title>
         <v-icon color="#fff" class="mx-3">far fa-laugh-beam</v-icon>
-         <v-btn icon>
-            <v-icon color='#fff'>notification</v-icon>
+        <v-btn icon>
+          <v-icon color="#fff">notification</v-icon>
         </v-btn>
-        <v-spacer></v-spacer>  
-       
-        <v-app-bar-nav-icon color="#fff" @click.stop="drawer = !drawer"></v-app-bar-nav-icon></v-app-bar>
+        <v-spacer></v-spacer>
+
+        <v-app-bar-nav-icon color="#fff" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      </v-app-bar>
 
       <v-content>
         <v-container fill-height>
@@ -274,6 +277,11 @@ export default {
     position: relative;
     left: -1.9rem;
     font-size: 23px;
+  }
+
+  a {
+      color: black;
+    text-decoration: none;
   }
 }
 </style>
