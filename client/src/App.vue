@@ -1,16 +1,22 @@
 <template>
   <div id="app">
-    <landingPage msg="Welcome to Your Vue.js App" />
+    <tete></tete>
+    <!--  <landingPage  />
+    <supadmin></supadmin>-->
   </div>
 </template>
 
 <script>
-import landingPage from "./components/landingPage.vue";
+//import landingPage from "./components/landingPage.vue";
+//import supadmin from "./components/supadmin.vue";
+import tete from "./components/header.vue";
 
 export default {
   name: "app",
   components: {
-    landingPage
+    tete
+    // landingPage
+    //supadmin
   }
 };
 </script>

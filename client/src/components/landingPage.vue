@@ -83,9 +83,6 @@ img {
   margin: 1rem;
 }
 
-.container {
-  /* put */
-}
 .center{
  width: 320px;
   border: 1px solid #21398a;
