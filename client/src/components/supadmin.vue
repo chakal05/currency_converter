@@ -93,13 +93,7 @@ export default {
         "icon-alt": "keyboard_arrow_down",
         text: "Statistiques",
         model: false,
-        children: [
-          { text: "Import" },
-          { text: "Export" },
-          { text: "Print" },
-          { text: "Undo changes" },
-          { text: "Other contacts" }
-        ]
+        children: [{ text: "Inscriptions" }, { text: "Financières" }]
       },
       { text: "Organigramme", icon: "contacts" },
       {
@@ -145,14 +139,11 @@ export default {
       {
         icon: "keyboard_arrow_up",
         "icon-alt": "keyboard_arrow_down",
-        text: "Demande d'admission",
+        text: "Demandes d'admission",
         model: false,
         children: [
-          { text: "Import" },
-          { text: "Export" },
-          { text: "Print" },
-          { text: "Undo changes" },
-          { text: "Other contacts" }
+          { text: "Demande d'admission" },
+          { text: "Listes de tests d'admission" }
         ]
       },
       {
@@ -161,11 +152,15 @@ export default {
         text: "Scolarité",
         model: false,
         children: [
-          { text: "Import" },
-          { text: "Export" },
-          { text: "Print" },
-          { text: "Undo changes" },
-          { text: "Other contacts" }
+          { text: "Elèves" },
+          { text: "Inscriptions" },
+          { text: "Elèves par classe" },
+          { text: "Autorisations d'absences" },
+          { text: "Reclamations" },
+          { text: "Demande de rendez-vous" },
+          { text: "Demande d'attestations" },
+          { text: "Listing" },
+          { text: "Listes des conditions" }
         ]
       },
       {
@@ -174,11 +169,9 @@ export default {
         text: "Emploi du temps",
         model: false,
         children: [
-          { text: "Import" },
-          { text: "Export" },
-          { text: "Print" },
-          { text: "Undo changes" },
-          { text: "Other contacts" }
+          { text: "Séances de cours" },
+          { text: "Disponibilités des vacataires" },
+          { text: "Horaires de l'école" }
         ]
       },
       {
@@ -187,11 +180,9 @@ export default {
         text: "Avancement",
         model: false,
         children: [
-          { text: "Import" },
-          { text: "Export" },
-          { text: "Print" },
-          { text: "Undo changes" },
-          { text: "Other contacts" }
+          { text: "Avancement journalier" },
+          { text: "Réqlisqtions pqr professeur" },
+          { text: "Réalisations par classe" }
         ]
       },
       {
@@ -200,34 +191,22 @@ export default {
         text: "Test QCM",
         model: false,
         children: [
-          { text: "Import" },
-          { text: "Export" },
-          { text: "Print" },
-          { text: "Undo changes" },
-          { text: "Other contacts" }
+          { text: "Questions par composante" },
+          { text: "Questionnaires" },
+          { text: "Difficultés des questions" },
+          { text: "Poster des tests" }
         ]
       },
-      {
-        icon: "keyboard_arrow_up",
-        "icon-alt": "keyboard_arrow_down",
-        text: "More",
-        model: false,
-        children: [
-          { text: "Import" },
-          { text: "Export" },
-          { text: "Print" },
-          { text: "Undo changes" },
-          { text: "Other contacts" }
-        ]
-      },
+
+      { icon: "keyboard", text: "Nouvelles" },
       {
         icon: "keyboard_arrow_up",
         "icon-alt": "keyboard_arrow_down",
         text: "Activités parascolaires",
         model: false,
         children: [
-          { text: "Import" },
-          { text: "Export" },
+          { text: "Activités  ..." },
+          { text: "Calendrier" },
           { text: "Print" },
           { text: "Undo changes" },
           { text: "Other contacts" }
@@ -239,11 +218,10 @@ export default {
         text: "Transport",
         model: false,
         children: [
-          { text: "Import" },
-          { text: "Export" },
-          { text: "Print" },
-          { text: "Undo changes" },
-          { text: "Other contacts" }
+          { text: "Trajet" },
+          { text: "Véhicules" },
+          { text: "Fournisseurs" },
+          { text: "Absences" }
         ]
       },
       {
@@ -252,15 +230,53 @@ export default {
         text: "Gestion financière",
         model: false,
         children: [
-          { text: "Import" },
-          { text: "Export" },
-          { text: "Print" },
-          { text: "Undo changes" },
-          { text: "Other contacts" }
+          { text: "Retards des paiements" },
+          { text: "Paiements des élèves" },
+          { text: "Fiche de paiement" },
+          { text: "Gestion des caissses" },
+          { text: "Mouvements de la caisse" },
+          { text: "Transfer d'argent" },
+          { text: "Versement à la banque" },
+          { text: "Packs des services" },
+          { text: "Tarifs des services" },
+          { text: "Periodicité des paiments" }
         ]
       },
 
-      { icon: "keyboard", text: "Réglement intérieur" }
+      { icon: "keyboard", text: "Réglement intérieur" },
+      { icon: "keyboard", text: "Charte de travail" },
+      {
+        icon: "keyboard_arrow_up",
+        "icon-alt": "keyboard_arrow_down",
+        text: "Journal des opérations",
+        model: false,
+        children: [
+          { text: "Retards des paiements" },
+          { text: "Paiements des élèves" },
+          { text: "Fiche de paiement" },
+          { text: "Gestion des caissses" },
+          { text: "Other contacts" }
+        ]
+      },
+      {
+        icon: "keyboard_arrow_up",
+        "icon-alt": "keyboard_arrow_down",
+        text: "Paramètres",
+        model: false,
+        children: [
+          { text: "Gestion des utilisateurs" },
+          { text: "Mises à jour" },
+          { text: "Annees scolaires" },
+          { text: "Gestion des caisses" },
+          { text: "Diplomes" },
+          { text: "Professeurs" },
+          { text: "Formations" },
+          { text: "Niveaux scolaires" },
+          { text: "Nature des matières" },
+          { text: "Diplomes" },
+          { text: "Sanctions" }
+        ]
+      }
     ]
   })
 };
@@ -278,10 +294,18 @@ export default {
     left: -1.9rem;
     font-size: 23px;
   }
+  .v-list-item__content {
+    a {
+      text-decoration: none;
 
-  a {
-      color: black;
-    text-decoration: none;
+      .v-list-item__title {
+        color: black;
+      }
+    }
+
+    a:hover .v-list-item__title {
+     font-size: 14px;
+    }
   }
 }
 </style>
