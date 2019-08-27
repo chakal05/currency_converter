@@ -1,20 +1,20 @@
 <template>
   <div id="app">
-   <!-- <landingPage></landingPage>-->
-   <supadmin></supadmin>
+   <!-- <home></home>-->
+   <directeur></directeur>
   
 
   </div>
 </template>
 
 <script>
-//import landingPage from "./components/landingPage";
-import supadmin from "./components/supadmin";
+//import home from "./components/home";
+import directeur from "./components/directeur";
 export default {
   name: "App",
   components: {
-    //landingPage
-   supadmin 
+    //home
+   directeur 
   },
   data: () => ({
     //
