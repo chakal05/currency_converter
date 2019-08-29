@@ -5,9 +5,9 @@
         <div class="logo-gris">
           <v-app-bar-nav-icon class="bar" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
           <v-toolbar-title class="mr-5 align-center">
-            <span>Manedek</span>
+            <span>manedek</span>
           </v-toolbar-title>
-          <v-icon class="laughI">far fa-laugh-beam</v-icon>
+          <v-icon class="laughI">trending_up</v-icon>
         </div>
         <v-list dense>
           <template v-for="item in items">
@@ -63,9 +63,9 @@
       <v-app-bar app clipped-left color="#21398a">
         <v-app-bar-nav-icon color="#fff" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title class="mr-5 align-center">
-          <span class="title">Manedek</span>
+          <span class="title">manedek</span>
         </v-toolbar-title>
-        <v-icon color="#fff" class="mx-3"><!-- far fa-laugh-beam --> trending_up</v-icon>
+        <v-icon color="#fff" class="mx-3"> trending_up</v-icon>
 
         <v-spacer></v-spacer>
 
@@ -116,7 +116,6 @@ export default {
         text: "Plateforme",
         icon: "keyboard_arrow_up",
         "icon-alt": "keyboard_arrow_down",
-
         model: false,
         children: [
           { text: "Import" },
@@ -213,7 +212,6 @@ export default {
           { text: "Poster des tests" }
         ]
       },
-
       { icon: "keyboard", text: "Nouvelles" },
       {
         icon: "keyboard_arrow_up",
@@ -258,7 +256,6 @@ export default {
           { text: "Periodicité des paiments" }
         ]
       },
-
       { icon: "keyboard", text: "Réglement intérieur" },
       { icon: "keyboard", text: "Charte de travail" },
       {
@@ -306,11 +303,9 @@ export default {
 .v-application {
   .title {
     color: #fff;
-    font-size: 1.5rem !important;
-
+    font-size: 2rem !important;
     margin-left: -1rem;
   }
-
   .v-btn__content {
     i {
       font-size: 23px;
@@ -318,42 +313,40 @@ export default {
   }
   .mx-3 {
     position: relative;
-    left: -2.31rem;
-    top: -.01rem;
-    font-size: 33px;
+    left: -2.4rem;
+    top: .08rem;
+    font-size: 35px;
   }
   .v-list-item__content {
     a {
       text-decoration: none;
-
       .v-list-item__title {
         color: black;
       }
     }
-
     a:hover .v-list-item__title {
       font-size: 14px;
     }
   }
-
   .logo-gris {
     display: flex;
     justify-content: baseline;
     align-items: baseline;
-
+  
     @include desktop {
       display: none;
     }
-
     span {
-      font-size: 1.5rem;
+      font-size: 2rem;
       margin-left: 1rem;
     }
+
     .laughI {
-      font-size: 23px;
+      font-size: 35px;
       position: relative;
-      left: -1.3rem;
-      top: -0.01rem;
+      left: -1.59rem;
+      top: .5rem;
+      color: #282828;
     }
 
     .bar {

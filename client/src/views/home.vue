@@ -9,7 +9,7 @@
               <v-toolbar color="#21398a" dark flat>
               <div class="logoIcon">
                      <v-toolbar-title class="mr-5 align-center">
-                      <span>Manedek</span>
+                      <span>manedek</span>
                           <v-icon >trending_up</v-icon>
                     </v-toolbar-title> 
                   </div>
