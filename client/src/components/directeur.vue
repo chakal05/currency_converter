@@ -2,6 +2,13 @@
   <div>
     <v-app id="inspire">
       <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
+        <div class="logo-gris">
+          <v-app-bar-nav-icon class="bar" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+          <v-toolbar-title class="mr-5 align-center">
+            <span>Manedek</span>
+          </v-toolbar-title>
+          <v-icon class="laughI">far fa-laugh-beam</v-icon>
+        </div>
         <v-list dense>
           <template v-for="item in items">
             <v-row v-if="item.heading" :key="item.heading" align="center">
@@ -23,7 +30,7 @@
               <template v-slot:activator>
                 <v-list-item>
                   <v-list-item-content>
-                  <v-list-item-title>{{ item.text }}</v-list-item-title>
+                    <v-list-item-title>{{ item.text }}</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </template>
@@ -44,7 +51,9 @@
                 <v-icon>{{ item.icon }}</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-             <a href="#">   <v-list-item-title>{{ item.text }}</v-list-item-title></a>
+                <a href="#">
+                  <v-list-item-title>{{ item.text }}</v-list-item-title>
+                </a>
               </v-list-item-content>
             </v-list-item>
           </template>
@@ -52,16 +61,23 @@
       </v-navigation-drawer>
 
       <v-app-bar app clipped-left color="#21398a">
+        <v-app-bar-nav-icon color="#fff" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title class="mr-5 align-center">
           <span class="title">Manedek</span>
         </v-toolbar-title>
         <v-icon color="#fff" class="mx-3">far fa-laugh-beam</v-icon>
-        <v-btn icon>
-          <v-icon color="#fff">notification</v-icon>
-        </v-btn>
+
         <v-spacer></v-spacer>
 
-        <v-app-bar-nav-icon color="#fff" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-btn icon>
+          <v-icon color="#fff">mail_outline</v-icon>
+        </v-btn>
+        <v-btn icon>
+          <v-icon color="#fff">mdi-bell</v-icon>
+        </v-btn>
+        <v-btn icon>
+          <v-icon color="#fff">account_circle</v-icon>
+        </v-btn>
       </v-app-bar>
 
       <v-content>
@@ -282,13 +298,24 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
+@mixin desktop {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
 .v-application {
   .title {
     color: #fff;
-    font-size: 2rem !important;
-    margin-left: 1rem;
+    font-size: 1.5rem !important;
+
+    margin-left: -1rem;
   }
 
+  .v-btn__content {
+    i {
+      font-size: 21px;
+    }
+  }
   .mx-3 {
     position: relative;
     left: -1.9rem;
@@ -304,7 +331,33 @@ export default {
     }
 
     a:hover .v-list-item__title {
-     font-size: 14px;
+      font-size: 14px;
+    }
+  }
+
+  .logo-gris {
+    display: flex;
+    justify-content: baseline;
+    align-items: baseline;
+
+    @include desktop {
+      display: none;
+    }
+
+    span {
+      font-size: 1.5rem;
+      margin-left: 1rem;
+    }
+    .laughI {
+      font-size: 23px;
+      position: relative;
+      left: -1.3rem;
+      top: -0.01rem;
+    }
+
+    .bar {
+      margin-left: 0.6rem;
+      margin-top: 0.5rem;
     }
   }
 }

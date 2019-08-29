@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-   <!-- <home></home>-->
-   <directeur></directeur>
-  
-
+   <!--    <home></home> -->
+   <directeur></directeur> 
   </div>
 </template>
 
@@ -13,8 +11,8 @@ import directeur from "./components/directeur";
 export default {
   name: "App",
   components: {
-    //home
-   directeur 
+    // home
+    directeur
   },
   data: () => ({
     //
@@ -32,7 +30,7 @@ body {
   height: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 *,
 *::after,
