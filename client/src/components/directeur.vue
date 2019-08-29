@@ -65,7 +65,7 @@
         <v-toolbar-title class="mr-5 align-center">
           <span class="title">Manedek</span>
         </v-toolbar-title>
-        <v-icon color="#fff" class="mx-3">far fa-laugh-beam</v-icon>
+        <v-icon color="#fff" class="mx-3"><!-- far fa-laugh-beam --> trending_up</v-icon>
 
         <v-spacer></v-spacer>
 
@@ -313,13 +313,14 @@ export default {
 
   .v-btn__content {
     i {
-      font-size: 21px;
+      font-size: 23px;
     }
   }
   .mx-3 {
     position: relative;
-    left: -1.9rem;
-    font-size: 23px;
+    left: -2.31rem;
+    top: -.01rem;
+    font-size: 33px;
   }
   .v-list-item__content {
     a {

@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-   <!--    <home></home> -->
-   <directeur></directeur> 
+      <home></home> 
+ <!--   <directeur></directeur>  -->
   </div>
 </template>
 
 <script>
-//import home from "./components/home";
-import directeur from "./components/directeur";
+import home from "./components/home";
+//import directeur from "./components/directeur";
 export default {
   name: "App",
   components: {
-    // home
-    directeur
+    home
+   //directeur
   },
   data: () => ({
     //

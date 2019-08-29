@@ -10,7 +10,7 @@
               <div class="logoIcon">
                      <v-toolbar-title class="mr-5 align-center">
                       <span>Manedek</span>
-                          <v-icon >far fa-laugh-beam</v-icon>
+                          <v-icon >trending_up</v-icon>
                     </v-toolbar-title> 
                   </div>
                 <div class="flex-grow-1"></div>
@@ -91,7 +91,9 @@ export default {
   }
     i{
       position: relative;
-      top: -.2rem;
+      top: -.25rem;
+      left: -.35rem;
+      font-size: 2.4rem;
     }
   }
 }
