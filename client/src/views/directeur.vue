@@ -84,7 +84,8 @@
         <v-container fill-height>
           <v-layout justify-center align-center>
             <v-flex>
-              <template>
+
+              <template v-if="first">
                 <v-row>
                   <v-col >
                     <v-sheet width="85%" height="750" class="calendrier">
@@ -128,7 +129,7 @@
                   </v-col>
 
                   <div class="cartes">
-                    <v-card  outlined class="noir"  color="#EF652F">
+                    <v-card  outlined  color="#EF652F">
                       <v-list-item three-line>
                         <v-list-item-content >
                           <v-list-item-title  class="headline md-1">400</v-list-item-title>
@@ -170,13 +171,7 @@
                   </div>
                 </v-row>
               </template>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-content>
-    </v-app>
-  </div>
-</template>
+
 
             </v-flex>
           </v-layout>
@@ -185,6 +180,7 @@
     </v-app>
   </div>
 </template>
+
 <script>
 export default {
   name: "supadmin",
@@ -194,6 +190,10 @@ export default {
   data: () => ({
     dialog: false,
     drawer: null,
+    first : true,
+
+
+
     items: [
       {
         icon: "keyboard_arrow_up",
@@ -471,7 +471,7 @@ export default {
   }
 
   .calendrier{
-    margin-left: 6rem;
+    margin: auto;
   }
 
   .cartes{
