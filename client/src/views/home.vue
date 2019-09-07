@@ -7,17 +7,15 @@
           <v-col cols="12" sm="8" md="4">
             <v-card class="elevation-12">
               <v-toolbar color="#21398a" dark flat>
-              <div class="logoIcon">
-                     <v-toolbar-title class="mr-5 align-center">
-                      <span>manedek</span>
-                          <v-icon >trending_up</v-icon>
-                    </v-toolbar-title> 
-                  </div>
+                <div class="logoIcon">
+                  <v-toolbar-title class="mr-5 align-center">
+                    <span>manedek</span>
+                    <v-icon>trending_up</v-icon>
+                  </v-toolbar-title>
+                </div>
                 <div class="flex-grow-1"></div>
                 <v-tooltip bottom>
-                  <template v-slot:activator="{ on }">
-                    
-                  </template>
+                  <template v-slot:activator="{ on }"></template>
                 </v-tooltip>
               </v-toolbar>
               <v-card-text>
@@ -35,7 +33,7 @@
               </v-card-text>
               <v-card-actions>
                 <div class="flex-grow-1"></div>
-                <v-btn>Connexion</v-btn>
+                <v-btn @click="chang">Connexion</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -54,7 +52,12 @@ export default {
   },
   data: () => ({
     drawer: null
-  })
+  }),
+  methods: {
+    chang: function() {
+      this.$router.push({ name: "admin" });
+    }
+  }
 };
 </script>
 
@@ -84,15 +87,15 @@ export default {
     color: #fff;
   }
 
-  .logoIcon{
-    margin-left: .5rem;
-  span{
-    font-size: 2rem;
-  }
-    i{
+  .logoIcon {
+    margin-left: 0.5rem;
+    span {
+      font-size: 2rem;
+    }
+    i {
       position: relative;
-      top: -.25rem;
-      left: -.35rem;
+      top: -0.25rem;
+      left: -0.35rem;
       font-size: 2.4rem;
     }
   }

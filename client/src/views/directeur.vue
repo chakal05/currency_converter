@@ -9,53 +9,66 @@
           </v-toolbar-title>
           <v-icon class="laughI">trending_up</v-icon>
         </div>
-        <v-list dense>
-          <template v-for="item in items">
-            <v-row v-if="item.heading" :key="item.heading" align="center">
-              <v-col cols="6">
-                <v-subheader v-if="item.heading">{{ item.heading }}</v-subheader>
-              </v-col>
-              <v-col cols="6" class="text-center">
-                <a href="#!" class="body-2 black--text">EDIT</a>
-              </v-col>
-            </v-row>
+        <v-list>
+          <template>
+            <v-list-item @click="dashboarde">
+              <v-list-item-icon>
+                <v-icon>home</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Tableau de bord</v-list-item-title>
+            </v-list-item>
 
-            <v-list-group
-              v-else-if="item.children"
-              :key="item.text"
-              v-model="item.model"
-              :prepend-icon="item.model ? item.icon : item['icon-alt']"
-              append-icon
-            >
+            <v-list-group prepend-icon="people">
               <template v-slot:activator>
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title>{{ item.text }}</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
+                <v-list-item-title>Management</v-list-item-title>
               </template>
-              <v-list-item v-for="(child, i) in item.children" :key="i">
-                <v-list-item-action v-if="child.icon">
-                  <v-icon>{{ child.icon }}</v-icon>
-                </v-list-item-action>
-                <v-list-item-content>
-                  <a href="#">
-                    <v-list-item-title>{{ child.text }}</v-list-item-title>
-                  </a>
-                </v-list-item-content>
+
+              <v-list-item @click="organigramme">
+                <v-list-item-title>Organigramme</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>contacts</v-icon>
+                </v-list-item-icon>
               </v-list-item>
             </v-list-group>
 
-            <v-list-item v-else :key="item.text">
-              <v-list-item-action>
-                <v-icon>{{ item.icon }}</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <a href="#">
-                  <v-list-item-title>{{ item.text }}</v-list-item-title>
-                </a>
-              </v-list-item-content>
-            </v-list-item>
+            <v-list-group prepend-icon="description">
+              <template v-slot:activator>
+                <v-list-item-title>Scolarites</v-list-item-title>
+              </template>
+
+              <v-list-item>
+                <v-list-item-title>Management</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>people</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+            </v-list-group>
+
+            <v-list-group prepend-icon="account_circle">
+              <template v-slot:activator>
+                <v-list-item-title>Comptes</v-list-item-title>
+              </template>
+
+              <v-list-item>
+                <v-list-item-title>Management</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>people</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+            </v-list-group>
+
+            <v-list-group prepend-icon="settings">
+              <template v-slot:activator>
+                <v-list-item-title>Parametres</v-list-item-title>
+              </template>
+
+              <v-list-item>
+                <v-list-item-title>Management</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>people</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+            </v-list-group>
           </template>
         </v-list>
       </v-navigation-drawer>
@@ -84,142 +97,8 @@
         <v-container fill-height>
           <v-layout justify-center align-center>
             <v-flex>
-
-              <template v-if="first">
-                <v-row>
-                  <v-col >
-                    <v-sheet width="85%" height="750" class="calendrier">
-                      <v-calendar
-                        ref="calendar"
-                        :now="today"
-                        :value="today"
-                        :events="events"
-                        color="primary"
-                        type="week"
-                      >
-                        <!-- the events at the top (all-day) -->
-                        <template v-slot:day-header="{ date }">
-                          <template v-for="event in eventsMap[date]">
-                            <!-- all day events don't have time -->
-                            <div
-                              v-if="!event.time"
-                              :key="event.title"
-                              class="my-event"
-                              @click="open(event)"
-                              v-html="event.title"
-                            ></div>
-                          </template>
-                        </template>
-                        <!-- the events at the bottom (timed) -->
-                        <template v-slot:day-body="{ date, timeToY, minutesToPixels }">
-                          <template v-for="event in eventsMap[date]">
-                            <!-- timed events -->
-                            <div
-                              v-if="event.time"
-                              :key="event.title"
-                              :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
-                              class="my-event with-time"
-                              @click="open(event)"
-                              v-html="event.title"
-                            ></div>
-                          </template>
-                        </template>
-                      </v-calendar>
-                    </v-sheet>
-                  </v-col>
-
-                  <div class="cartes">
-                    <v-card  outlined  color="#EF652F">
-                      <v-list-item three-line>
-                        <v-list-item-content >
-                          <v-list-item-title  class="headline md-1">400</v-list-item-title>
-                          <v-list-item-subtitle >Le nombre des inscrits</v-list-item-subtitle>
-                        </v-list-item-content>
-
-                      </v-list-item>
-
-                    </v-card>
-                    <v-card outlined color="#7EE420">
-                      <v-list-item three-line>
-                        <v-list-item-content  >
-                          <v-list-item-title class="headline mb-1" >24</v-list-item-title>
-                          <v-list-item-subtitle>Nombre des Pré-inscrits </v-list-item-subtitle>
-                        </v-list-item-content>
-
-                        </v-list-item>
-
-                    </v-card>
-                    <v-card outlined color="#223C8A">
-                      <v-list-item three-line>
-                        <v-list-item-content>
-                          <v-list-item-title class=" white--text headline mb-1"> 0 </v-list-item-title>
-                          <v-list-item-subtitle class="white--text">Le nombre d'abondons</v-list-item-subtitle>
-                        </v-list-item-content>
-
-                        </v-list-item>
-
-                    </v-card>
-                      <v-card  outlined color="#CD3A29">
-                      <v-list-item three-line>
-                        <v-list-item-content>
-                          <v-list-item-title class=" white--text headline mb-1"> 0 </v-list-item-title>
-                          <v-list-item-subtitle class="white--text" >Nombres des départs </v-list-item-subtitle>
-                        </v-list-item-content>
-
-                         </v-list-item>
-                    </v-card>
-                  </div>
-                </v-row>
-              </template>
-
-
-              <template v-if="organigramme">
-
- <v-card
-    class="mx-auto"
-    max-width="434"
-    tile
-  >
-    <v-img
-      height="100%"
-      src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"
-    >
-      <v-row
-        align="end"
-        class="fill-height"
-      >
-        <v-col
-          align-self="start"
-          class="pa-0"
-          cols="12"
-        >
-          <v-avatar
-            class="profile"
-            color="grey"
-            size="164"
-            tile
-          >
-            <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
-          </v-avatar>
-        </v-col>
-        <v-col class="py-0">
-          <v-list-item
-            color="rgba(0, 0, 0, .4)"
-            dark
-          >
-            <v-list-item-content>
-              <v-list-item-title class="title">Marcus Obrien</v-list-item-title>
-              <v-list-item-subtitle>Network Engineer</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-col>
-      </v-row>
-    </v-img>
-  </v-card>
-
-              </template>
-
-
+              <dashboard v-if="first"></dashboard>
+              <organigramme v-if="organigramm"></organigramme>
             </v-flex>
           </v-layout>
         </v-container>
@@ -228,9 +107,17 @@
   </div>
 </template>
 
+
+
 <script>
+import organigramme from "../components/organigrame";
+import dashboard from "../components/dashboardDir";
 export default {
   name: "supadmin",
+  components: {
+    dashboard,
+    organigramme
+  },
   props: {
     source: String
   },
@@ -238,222 +125,31 @@ export default {
   data: () => ({
     dialog: false,
     drawer: null,
-    first : true,
-organigramme: false ,
-//TOdo find a way to add methods to the 'items' so that on click something happens 
+    first: true,
+    organigramm: false,
 
-
-    items: [
-      {
-        icon: "keyboard_arrow_up",
-        "icon-alt": "keyboard_arrow_down",
-        text: "Statistiques",
-        model: false,
-        children: [{ text: "Inscriptions" }, { text: "Financières" }]
-      },
-      { text: "Organigramme", icon: "contacts" },
-      {
-        text: "Plateforme",
-        icon: "keyboard_arrow_up",
-        "icon-alt": "keyboard_arrow_down",
-        model: false,
-        children: [
-          { text: "Import" },
-          { text: "Export" },
-          { text: "Print" },
-          { text: "Undo changes" },
-          { text: "Other contacts" }
-        ]
-      },
-      {
-        icon: "keyboard_arrow_up",
-        "icon-alt": "keyboard_arrow_down",
-        text: "Ressources Humaines",
-        model: false,
-        children: [
-          { text: "Import" },
-          { text: "Export" },
-          { text: "Print" },
-          { text: "Undo changes" },
-          { text: "Other contacts" }
-        ]
-      },
-      {
-        icon: "keyboard_arrow_up",
-        "icon-alt": "keyboard_arrow_down",
-        text: "Répartition annuelle",
-        model: false,
-        children: [
-          { text: "Import" },
-          { text: "Export" },
-          { text: "Print" },
-          { text: "Undo changes" },
-          { text: "Other contacts" }
-        ]
-      },
-      {
-        icon: "keyboard_arrow_up",
-        "icon-alt": "keyboard_arrow_down",
-        text: "Demandes d'admission",
-        model: false,
-        children: [
-          { text: "Demande d'admission" },
-          { text: "Listes de tests d'admission" }
-        ]
-      },
-      {
-        icon: "keyboard_arrow_up",
-        "icon-alt": "keyboard_arrow_down",
-        text: "Scolarité",
-        model: false,
-        children: [
-          { text: "Elèves" },
-          { text: "Inscriptions" },
-          { text: "Elèves par classe" },
-          { text: "Autorisations d'absences" },
-          { text: "Reclamations" },
-          { text: "Demande de rendez-vous" },
-          { text: "Demande d'attestations" },
-          { text: "Listing" },
-          { text: "Listes des conditions" }
-        ]
-      },
-      {
-        icon: "keyboard_arrow_up",
-        "icon-alt": "keyboard_arrow_down",
-        text: "Emploi du temps",
-        model: false,
-        children: [
-          { text: "Séances de cours" },
-          { text: "Disponibilités des vacataires" },
-          { text: "Horaires de l'école" }
-        ]
-      },
-      {
-        icon: "keyboard_arrow_up",
-        "icon-alt": "keyboard_arrow_down",
-        text: "Avancement",
-        model: false,
-        children: [
-          { text: "Avancement journalier" },
-          { text: "Réqlisqtions pqr professeur" },
-          { text: "Réalisations par classe" }
-        ]
-      },
-      {
-        icon: "keyboard_arrow_up",
-        "icon-alt": "keyboard_arrow_down",
-        text: "Test QCM",
-        model: false,
-        children: [
-          { text: "Questions par composante" },
-          { text: "Questionnaires" },
-          { text: "Difficultés des questions" },
-          { text: "Poster des tests" }
-        ]
-      },
-      { icon: "keyboard", text: "Nouvelles" },
-      {
-        icon: "keyboard_arrow_up",
-        "icon-alt": "keyboard_arrow_down",
-        text: "Activités parascolaires",
-        model: false,
-        children: [
-          { text: "Activités  ..." },
-          { text: "Calendrier" },
-          { text: "Print" },
-          { text: "Undo changes" },
-          { text: "Other contacts" }
-        ]
-      },
-      {
-        icon: "keyboard_arrow_up",
-        "icon-alt": "keyboard_arrow_down",
-        text: "Transport",
-        model: false,
-        children: [
-          { text: "Trajet" },
-          { text: "Véhicules" },
-          { text: "Fournisseurs" },
-          { text: "Absences" }
-        ]
-      },
-      {
-        icon: "keyboard_arrow_up",
-        "icon-alt": "keyboard_arrow_down",
-        text: "Gestion financière",
-        model: false,
-        children: [
-          { text: "Retards des paiements" },
-          { text: "Paiements des élèves" },
-          { text: "Fiche de paiement" },
-          { text: "Gestion des caissses" },
-          { text: "Mouvements de la caisse" },
-          { text: "Transfer d'argent" },
-          { text: "Versement à la banque" },
-          { text: "Packs des services" },
-          { text: "Tarifs des services" },
-          { text: "Periodicité des paiments" }
-        ]
-      },
-      { icon: "keyboard", text: "Réglement intérieur" },
-      { icon: "keyboard", text: "Charte de travail" },
-      {
-        icon: "keyboard_arrow_up",
-        "icon-alt": "keyboard_arrow_down",
-        text: "Journal des opérations",
-        model: false,
-        children: [
-          { text: "Retards des paiements" },
-          { text: "Paiements des élèves" },
-          { text: "Fiche de paiement" },
-          { text: "Gestion des caissses" },
-          { text: "Other contacts" }
-        ]
-      },
-      {
-        icon: "keyboard_arrow_up",
-        "icon-alt": "keyboard_arrow_down",
-        text: "Paramètres",
-        model: false,
-        children: [
-          { text: "Gestion des utilisateurs" },
-          { text: "Mises à jour" },
-          { text: "Annees scolaires" },
-          { text: "Gestion des caisses" },
-          { text: "Diplomes" },
-          { text: "Professeurs" },
-          { text: "Formations" },
-          { text: "Niveaux scolaires" },
-          { text: "Nature des matières" },
-          { text: "Diplomes" },
-          { text: "Sanctions" }
-        ]
-      }
+    admins: [["Management", "people_outline"], ["Settings", "settings"]],
+    cruds: [
+      ["Create", "add"],
+      ["Read", "insert_drive_file"],
+      ["Update", "update"],
+      ["Delete", "delete"]
     ],
-    today: "2019-01-08",
-    events: [
-      {
-        name: "Weekly Meeting",
-        start: "2019-01-07 09:00",
-        end: "2019-01-07 10:00"
-      },
-      {
-        name: "Thomas' Birthday",
-        start: "2019-01-10"
-      },
-      {
-        name: "Mash Potatoes",
-        start: "2019-01-09 12:30",
-        end: "2019-01-09 15:30"
-      }
-    ]
-  }),
-  methods : {
 
-    organigramme() {
-      this.data.items[1].organigramme = true;
+  
+  }),
+  methods: {
+    organigramme: function() {
+      this.first = false;
+      this.organigramm = true;
+    },
+
+    dashboarde : function() {
+      this.first = true;
+      this.organigramm = false;
     }
+,
+    
   },
   mounted() {
     this.$refs.calendar.scrollToTime("08:00");
@@ -520,28 +216,5 @@ organigramme: false ,
       margin-top: 0.5rem;
     }
   }
-
-  .col {
-    max-width: 80% !important;
-  }
-
-  .calendrier{
-    margin: auto;
-  }
-
-  .cartes{
-
-    padding-top: .4rem;
-
-    .v-card{
-      text-align: center;
-      margin-top: 1rem;
-      margin-right: 1rem;
-      height: 170px;
-      padding-top: 2rem;
-    }
-
-  }
- 
 }
 </style>
