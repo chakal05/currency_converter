@@ -6,7 +6,7 @@
       <v-row>
         <v-dialog v-model="dialog" persistent max-width="600px">
           <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark v-on="on">
+            <v-btn color="#21398a" dark v-on="on">
               Ajouter un evenement
               <v-icon>add_box</v-icon>
             </v-btn>
@@ -41,8 +41,8 @@
                       </template>
                       <v-date-picker v-model="date" no-title scrollable>
                         <div class="flex-grow-1"></div>
-                        <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                        <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+                        <v-btn text color="indigo darken-4" @click="menu = false">Cancel</v-btn>
+                        <v-btn text color="indigo darken-4" @click="$refs.menu.save(date)">OK</v-btn>
                       </v-date-picker>
                     </v-menu>
                   </v-col>
@@ -85,7 +85,7 @@
             :now="today"
             :value="today"
             :events="events"
-            color="primary"
+            color="#21398a"
             type="week"
           >
             <!-- the events at the top (all-day) -->
@@ -120,35 +120,35 @@
       </v-col>
 
       <div class="cartes">
-        <v-card outlined color="#EF652F">
-          <v-list-item three-line>
-            <v-list-item-content>
-              <v-list-item-title class="headline md-1">400</v-list-item-title>
-              <v-list-item-subtitle>Le nombre des inscrits</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-card>
-        <v-card outlined color="#7EE420">
-          <v-list-item three-line>
-            <v-list-item-content>
-              <v-list-item-title class="headline mb-1">24</v-list-item-title>
-              <v-list-item-subtitle>Nombre des Pré-inscrits</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-card>
         <v-card outlined color="#223C8A">
           <v-list-item three-line>
             <v-list-item-content>
-              <v-list-item-title class="white--text headline mb-1">0</v-list-item-title>
-              <v-list-item-subtitle class="white--text">Le nombre d'abondons</v-list-item-subtitle>
+              <v-list-item-title class=" white--text headline md-1">400</v-list-item-title>
+              <v-list-item-subtitle class="white--text">Le nombre des inscrits</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-card>
-        <v-card outlined color="#CD3A29">
+        <v-card outlined color="green darken-4">
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title class=" white--text headline mb-1">123</v-list-item-title>
+              <v-list-item-subtitle class="white--text">Nombre des Pré-inscrits</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-card>
+        <v-card outlined color="deep-orange darken-4">
+          <v-list-item three-line>
+            <v-list-item-content>
+              <v-list-item-title class="white--text headline mb-1">32</v-list-item-title>
+              <v-list-item-subtitle class="white--text">Le nombre de professeurs</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-card>
+        <v-card outlined color="brown darken-4">
           <v-list-item three-line>
             <v-list-item-content>
               <v-list-item-title class="white--text headline mb-1">0</v-list-item-title>
-              <v-list-item-subtitle class="white--text">Nombres des départs</v-list-item-subtitle>
+              <v-list-item-subtitle class="white--text">Nombres d'abondons</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -207,7 +207,7 @@ export default {
 
   .row {
     .v-btn {
-      margin: .5rem;
+      margin: 0.5rem;
 
       .v-icon {
         margin-left: 1rem;
@@ -220,15 +220,27 @@ export default {
 }
 .calendrier {
   margin: auto;
+
+  .v-calendar {
+    .v-btn {
+      color: #fff;
+    }
+  }
 }
 .cartes {
-  padding-top: 1rem;
   .v-card {
     text-align: center;
     margin-top: 1rem;
     margin-right: 1rem;
     height: 160px;
     padding-top: 2rem;
+    font-weight: bold;
+
+
   }
+
+  .headline{
+            font-size: 2.3rem !important;
+        }
 }
 </style>

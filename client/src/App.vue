@@ -22,7 +22,9 @@ export default {
 //Todo Make a better logo 
 
 
-<style >
+<style lang='scss'>
+
+
 html,
 body {
   width: 100%;
