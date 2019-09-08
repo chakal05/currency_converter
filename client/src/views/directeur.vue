@@ -9,7 +9,7 @@
           </v-toolbar-title>
           <v-icon class="laughI">trending_up</v-icon>
         </div>
-        <v-list>
+        <v-list dense>
           <template>
             <v-list-item @click="dashboarde">
               <v-list-item-icon>
@@ -37,11 +37,89 @@
               </template>
 
               <v-list-item>
-                <v-list-item-title>Management</v-list-item-title>
+                <v-list-item-title>Elèves par classe</v-list-item-title>
                 <v-list-item-icon>
-                  <v-icon>people</v-icon>
+                  <v-icon>fas fa-graduation-cap</v-icon>
                 </v-list-item-icon>
               </v-list-item>
+
+              <v-list-item>
+                <v-list-item-title>Demandes d'admission</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>person_add</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-title>Inscription</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>add_box</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-title>Autorisation d'absence</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>check_circle</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-title>Réclamations</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>fas fa-exclamation-triangle</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-title>Demandes de rendez-vous</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>add_circle</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-title>Demandes d'attestation</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>add_circle</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+
+              <v-list-group sub-group no-action>
+                <template v-slot:activator>
+                  <v-list-content>
+                    <v-list-item-title>Listes</v-list-item-title>
+                  </v-list-content>
+                </template>
+
+                <v-list-item>
+                  <v-list-item-icon>
+                    <v-icon>view_list</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-title>Listes des inscrits</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item>
+                  <v-list-item-icon>
+                    <v-icon>view_list</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-title>Listes des pré-inscrits</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item>
+                  <v-list-item-icon>
+                    <v-icon>view_list</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-title>Listes des départs</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item>
+                  <v-list-item-icon>
+                    <v-icon>view_list</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-title>Listes des abondons</v-list-item-title>
+                </v-list-item>
+              </v-list-group>
             </v-list-group>
 
             <v-list-group prepend-icon="account_circle">
@@ -53,6 +131,106 @@
                 <v-list-item-title>Management</v-list-item-title>
                 <v-list-item-icon>
                   <v-icon>people</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+            </v-list-group>
+
+            <v-list-group prepend-icon="alarm">
+              <template v-slot:activator>
+                <v-list-item-title>Emplois du temps</v-list-item-title>
+              </template>
+
+              <v-list-item>
+                <v-list-item-title>Séances de cours</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>far fa-circle</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-title>Disponibilité des vacataires</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>far fa-circle</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+            </v-list-group>
+
+            <v-list-group prepend-icon="book">
+              <template v-slot:activator>
+                <v-list-item-title>Journal des opérations</v-list-item-title>
+              </template>
+
+              <v-list-item>
+                <v-list-item-title>Journal des professeurs</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>far fa-circle</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-title>Autre journal</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>far fa-circle</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+            </v-list-group>
+
+            <v-list-group prepend-icon="fas fa-headphones">
+              <template v-slot:activator>
+                <v-list-item-title>Activités parascolaires</v-list-item-title>
+              </template>
+
+              <v-list-item>
+                <v-list-item-title>Calendrier</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>far fa-circle</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-title>Catégories</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>far fa-circle</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+            </v-list-group>
+
+            <v-list-group prepend-icon="fas fa-bus">
+              <template v-slot:activator>
+                <v-list-item-title>Transport</v-list-item-title>
+              </template>
+
+              <v-list-item>
+                <v-list-item-title>Véhicules</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>far fa-circle</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-title>Fournisseurs</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>far fa-circle</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+            </v-list-group>
+
+            <v-list-group prepend-icon="fas fa-coins">
+              <template v-slot:activator>
+                <v-list-item-title>Gestion financière</v-list-item-title>
+              </template>
+
+              <v-list-item>
+                <v-list-item-title>Payments réçus</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>far fa-circle</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-title>Payments en retard</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>far fa-circle</v-icon>
                 </v-list-item-icon>
               </v-list-item>
             </v-list-group>
@@ -134,9 +312,7 @@ export default {
       ["Read", "insert_drive_file"],
       ["Update", "update"],
       ["Delete", "delete"]
-    ],
-
-  
+    ]
   }),
   methods: {
     organigramme: function() {
@@ -144,18 +320,14 @@ export default {
       this.organigramm = true;
     },
 
-    dashboarde : function() {
+    dashboarde: function() {
       this.first = true;
       this.organigramm = false;
     }
-,
-    
-  },
-  mounted() {
-    this.$refs.calendar.scrollToTime("08:00");
   }
 };
 </script>
+
 <style lang='scss' scoped>
 @mixin desktop {
   @media (min-width: 992px) {
