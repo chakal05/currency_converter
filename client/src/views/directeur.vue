@@ -7,7 +7,7 @@
           <v-toolbar-title class="mr-5 align-center">
             <span>manedek</span>
           </v-toolbar-title>
-          <v-icon class="laughI">trending_up</v-icon>
+          <v-icon class="trending">trending_up</v-icon>
         </div>
         <v-list dense>
           <template>
@@ -329,16 +329,29 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+
+@mixin ipad {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
 @mixin desktop {
   @media (min-width: 992px) {
     @content;
   }
 }
+
 .v-application {
   .title {
     color: #fff;
     font-size: 2rem !important;
     margin-left: -1rem;
+
+    @include ipad {
+      font-size: 1.5rem !important;
+     
+    }
   }
   .v-btn__content {
     i {
@@ -362,6 +375,7 @@ export default {
       font-size: 14px;
     }
   }
+
   .logo-gris {
     display: flex;
     justify-content: baseline;
@@ -370,12 +384,13 @@ export default {
     @include desktop {
       display: none;
     }
+
     span {
       font-size: 2rem;
       margin-left: 1rem;
     }
 
-    .laughI {
+    .trending {
       font-size: 35px;
       position: relative;
       left: -1.59rem;

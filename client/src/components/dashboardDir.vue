@@ -85,7 +85,7 @@
             :now="today"
             :value="today"
             :events="events"
-            color="#21398a"
+            color="grey lighten-2"
             type="week"
           >
             <!-- the events at the top (all-day) -->
@@ -123,7 +123,7 @@
         <v-card outlined color="#223C8A">
           <v-list-item three-line>
             <v-list-item-content>
-              <v-list-item-title class=" white--text headline md-1">400</v-list-item-title>
+              <v-list-item-title class="white--text headline md-1">400</v-list-item-title>
               <v-list-item-subtitle class="white--text">Le nombre des inscrits</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -131,12 +131,12 @@
         <v-card outlined color="green darken-4">
           <v-list-item three-line>
             <v-list-item-content>
-              <v-list-item-title class=" white--text headline mb-1">123</v-list-item-title>
+              <v-list-item-title class="white--text headline mb-1">123</v-list-item-title>
               <v-list-item-subtitle class="white--text">Nombre des Pré-inscrits</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-card>
-        <v-card outlined color="deep-orange darken-4">
+        <v-card outlined color="brown darken-4">
           <v-list-item three-line>
             <v-list-item-content>
               <v-list-item-title class="white--text headline mb-1">32</v-list-item-title>
@@ -144,7 +144,7 @@
             </v-list-item-content>
           </v-list-item>
         </v-card>
-        <v-card outlined color="brown darken-4">
+        <v-card outlined color="deep-orange darken-4">
           <v-list-item three-line>
             <v-list-item-content>
               <v-list-item-title class="white--text headline mb-1">0</v-list-item-title>
@@ -197,17 +197,36 @@ export default {
 </script>
 
 <style lang="scss">
+@mixin ipad {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
 .premierTitre {
-  padding-left: 6rem;
-  margin-bottom: 0.5rem;
+  width: 87.5%;
+  margin: auto;
+
+  @include ipad {
+    padding-left: 0;
+    text-align: center;
+  }
 
   h4 {
     margin-top: 0.5rem;
   }
 
   .row {
+    @include ipad {
+      display: flex;
+      justify-content: center;
+    }
     .v-btn {
       margin: 0.5rem;
+
+      @include ipad {
+        margin: 1rem;
+      }
 
       .v-icon {
         margin-left: 1rem;
@@ -217,17 +236,27 @@ export default {
 }
 .col {
   max-width: 80% !important;
+
+  @include ipad {
+   margin: auto;
+  max-width: 100% !important;
+  }
 }
 .calendrier {
   margin: auto;
 
+
   .v-calendar {
     .v-btn {
-      color: #fff;
+     
     }
   }
 }
+
 .cartes {
+  @include ipad {
+    width: 100%;
+  }
   .v-card {
     text-align: center;
     margin-top: 1rem;
@@ -236,11 +265,15 @@ export default {
     padding-top: 2rem;
     font-weight: bold;
 
-
+     @include ipad {
+    width: 80%;
+    margin: auto;
+    margin-top: 1rem;
+  }
   }
 
-  .headline{
-            font-size: 2.3rem !important;
-        }
+  .headline {
+    font-size: 2.3rem !important;
+  }
 }
 </style>
