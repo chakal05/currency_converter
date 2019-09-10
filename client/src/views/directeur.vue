@@ -29,6 +29,13 @@
                   <v-icon>contacts</v-icon>
                 </v-list-item-icon>
               </v-list-item>
+
+              <v-list-item @click="organigramme">
+                <v-list-item-title>Editer</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>add_box</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
             </v-list-group>
 
             <v-list-group prepend-icon="description">

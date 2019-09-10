@@ -1,6 +1,7 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row class="firstRow">
+
       <v-card class="mx-auto" max-width="250">
         <v-img
           class="white--text"
@@ -23,7 +24,7 @@
         text
         color="orange"
       >
-        Contacter
+        contacter
       </v-btn>
       <v-btn
         text
@@ -56,7 +57,7 @@
         text
         color="orange"
       >
-        Contacter
+        contacter
       </v-btn>
       <v-btn
         text
@@ -85,8 +86,8 @@
         </v-card-text>
 
         <v-card-actions>
-          <v-btn text color="orange">Share</v-btn>
-          <v-btn text color="orange">Explore</v-btn>
+          <v-btn text color="orange">contacter</v-btn>
+          <v-btn text color="orange">profil</v-btn>
         </v-card-actions>
       </v-card>
 
@@ -141,23 +142,7 @@
 <script>
 export default {
   data: () => ({
-    cards: [
-      {
-        title: "Pre-fab homes",
-        src: "https://cdn.vuetifyjs.com/images/cards/house.jpg",
-        flex: 12
-      },
-      {
-        title: "Favorite road trips",
-        src: "https://cdn.vuetifyjs.com/images/cards/road.jpg",
-        flex: 6
-      },
-      {
-        title: "Best airlines",
-        src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg",
-        flex: 6
-      }
-    ]
+   
   }),
 
   methods: () => ({})
@@ -165,10 +150,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.secondRow {
 
+
+.secondRow {
   .v-card{
-    margin-top: 2rem;
+    margin-top: 3rem;
   }
 }
 </style>
