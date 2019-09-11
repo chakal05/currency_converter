@@ -124,7 +124,7 @@
           <v-list-item three-line>
             <v-list-item-content>
               <v-list-item-title class="white--text headline md-1">400</v-list-item-title>
-              <v-list-item-subtitle class="white--text">Le nombre des inscrits</v-list-item-subtitle>
+              <v-list-item-subtitle class="white--text">Nombre des inscrits</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -140,7 +140,7 @@
           <v-list-item three-line>
             <v-list-item-content>
               <v-list-item-title class="white--text headline mb-1">32</v-list-item-title>
-              <v-list-item-subtitle class="white--text">Le nombre de professeurs</v-list-item-subtitle>
+              <v-list-item-subtitle class="white--text">Nombre de professeurs</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-card>
@@ -148,7 +148,7 @@
           <v-list-item three-line>
             <v-list-item-content>
               <v-list-item-title class="white--text headline mb-1">0</v-list-item-title>
-              <v-list-item-subtitle class="white--text">Nombres d'abondons</v-list-item-subtitle>
+              <v-list-item-subtitle class="white--text">Nombre d'abondons</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-card>

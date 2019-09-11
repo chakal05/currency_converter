@@ -267,6 +267,9 @@
 
         <v-spacer></v-spacer>
 
+          <v-btn icon > 
+            <v-icon color='#fff'> language</v-icon>
+          </v-btn>
         <v-btn icon>
           <v-icon color="#fff">mail_outline</v-icon>
         </v-btn>

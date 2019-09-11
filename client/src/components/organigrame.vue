@@ -37,7 +37,7 @@
     </v-row>
 
     <v-row class="secondRow">
-      <v-card class="mx-auto" max-width="200">
+      <v-card class="mx-auto" max-width="230">
         <v-img
           class="white--text"
           height="250px"
@@ -69,7 +69,7 @@
       
       </v-card>
 
-        <v-card class="mx-auto" max-width="200">
+        <v-card class="mx-auto" max-width="230">
         <v-img
           class="white--text"
           height="250px"
@@ -91,7 +91,7 @@
         </v-card-actions>
       </v-card>
 
-        <v-card class="mx-auto" max-width="200">
+        <v-card class="mx-auto" max-width="230">
         <v-img
           class="white--text"
           height="250px"
@@ -113,7 +113,7 @@
         </v-card-actions>
       </v-card>
 
-          <v-card class="mx-auto" max-width="200">
+          <v-card class="mx-auto" max-width="230">
         <v-img
           class="white--text"
           height="250px"
@@ -126,6 +126,130 @@
             <span>Jamal Muhyadin</span>
             <br />
             <span>Securite et jardinnage</span>
+          </span>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-btn text color="orange">Contacter</v-btn>
+          <v-btn text color="orange">profil </v-btn>
+        </v-card-actions>
+      </v-card>
+
+    </v-row>
+
+      <v-row class="secondRow">
+      <v-card class="mx-auto" max-width="200">
+        <v-img
+          class="white--text"
+          height="250px"
+          src="../assets/surveillante.jpeg"
+        >
+         </v-img>
+
+        <v-card-text>
+          <span class="text--primary">
+            <span>Hanna Moussa </span>
+            <br />
+            <span>Surveillante</span>
+          </span>
+        </v-card-text>
+<v-card-actions>
+      <v-btn
+        text
+        color="orange"
+      >
+        contacter
+      </v-btn>
+      <v-btn
+        text
+        color="orange"
+      >
+        profil
+      </v-btn>
+    </v-card-actions>
+      
+      </v-card>
+
+        <v-card class="mx-auto" max-width="200">
+        <v-img
+          class="white--text"
+          height="250px"
+          src="../assets/surveillant.jpeg"
+        >
+        </v-img>
+
+        <v-card-text>
+          <span class="text--primary">
+            <span>Moumin Noor</span>
+            <br />
+            <span>Surveillant  </span>
+          </span>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-btn text color="orange">contacter</v-btn>
+          <v-btn text color="orange">profil</v-btn>
+        </v-card-actions>
+      </v-card>
+
+        <v-card class="mx-auto" max-width="200">
+        <v-img
+          class="white--text"
+          height="250px"
+          src="../assets/secretaire.jpeg"
+        >
+         </v-img>
+
+        <v-card-text>
+          <span class="text--primary">
+            <span>Ifrah Hassan </span>
+            <br />
+            <span>Secretaire</span>
+          </span>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-btn text color="orange">Contacter</v-btn>
+          <v-btn text color="orange">Profil</v-btn>
+        </v-card-actions>
+      </v-card>
+
+          <v-card class="mx-auto" max-width="200">
+        <v-img
+          class="white--text"
+          height="250px"
+          src="../assets/survellant1.png"
+        >
+          </v-img>
+
+        <v-card-text>
+          <span class="text--primary">
+            <span>Samatar Salah</span>
+            <br />
+            <span>Surveillant</span>
+          </span>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-btn text color="orange">Contacter</v-btn>
+          <v-btn text color="orange">profil </v-btn>
+        </v-card-actions>
+      </v-card>
+
+
+          <v-card class="mx-auto" max-width="200">
+        <v-img
+          class="white--text"
+          height="250px"
+          src="../assets/surveillante1.jpeg"
+        >
+          </v-img>
+
+        <v-card-text>
+          <span class="text--primary">
+            <span>Kadra Youssouf</span>
+            <br />
+            <span>Surveillante</span>
           </span>
         </v-card-text>
 
