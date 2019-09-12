@@ -106,6 +106,10 @@
 </template>
 
 <script>
+
+//todo  Editing should have 3 options: add, update and delete
+//? Do it here or create a new coponent ?
+
 export default {
   data: () => ({
     direction: [
