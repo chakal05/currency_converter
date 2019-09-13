@@ -18,20 +18,20 @@
               <v-list-item-title>Tableau de bord</v-list-item-title>
             </v-list-item>
 
-            <v-list-group prepend-icon="people">
+            <v-list-group prepend-icon="contacts">
               <template v-slot:activator>
-                <v-list-item-title>Management</v-list-item-title>
+                <v-list-item-title>Personnel</v-list-item-title>
               </template>
 
               <v-list-item @click="organigramme">
-                <v-list-item-title>Organigramme</v-list-item-title>
+                <v-list-item-title>Professeurs </v-list-item-title>
                 <v-list-item-icon>
-                  <v-icon>contacts</v-icon>
+                  <v-icon>people</v-icon>
                 </v-list-item-icon>
               </v-list-item>
 
               <v-list-item @click="organigramme">
-                <v-list-item-title>Editer</v-list-item-title>
+                <v-list-item-title>Surveillants</v-list-item-title>
                 <v-list-item-icon>
                   <v-icon>add_box</v-icon>
                 </v-list-item-icon>
