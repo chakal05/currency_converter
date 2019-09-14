@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/home'
 import admin from '@/views/directeur'
-import organigrame from '@/components/organigrame'
+import personelProf from '@/components/personelProf'
+import personelAdmin from '@/components/personelAdmin'
 Vue.use(Router)
 
 const router = new Router({
@@ -17,7 +18,7 @@ const router = new Router({
     {
       path: '/dashboard',
       name: 'admin',
-      component: admin, organigrame
+      component: admin, personelProf, personelAdmin
     }
   ]
 })

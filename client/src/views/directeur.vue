@@ -23,13 +23,20 @@
                 <v-list-item-title>Personnel</v-list-item-title>
               </template>
 
-              <v-list-item @click="organigramme">
-                <v-list-item-title>Professeurs </v-list-item-title>
+              <v-list-item @click="personelAdmin">
+                <v-list-item-title>Administration</v-list-item-title>
                 <v-list-item-icon>
-                  <v-icon>people</v-icon>
+                  <v-icon>fas fa-users-cog</v-icon>
                 </v-list-item-icon>
               </v-list-item>
 
+              <v-list-item @click="personelProf">
+                <v-list-item-title>Professeurs</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon> fas fa-chalkboard-teacher
+                  </v-icon>
+                </v-list-item-icon>
+              </v-list-item>
             </v-list-group>
 
             <v-list-group prepend-icon="description">
@@ -37,7 +44,7 @@
                 <v-list-item-title>Scolarites</v-list-item-title>
               </template>
 
-              <v-list-item @click="organigramm">
+              <v-list-item @click="dashboarde">
                 <v-list-item-title>Classes</v-list-item-title>
                 <v-list-item-icon>
                   <v-icon>view_module</v-icon>
@@ -242,7 +249,7 @@
               </template>
 
               <v-list-item>
-                <v-list-item-title>Management</v-list-item-title>
+                <v-list-item-title>Parametres generales</v-list-item-title>
                 <v-list-item-icon>
                   <v-icon>people</v-icon>
                 </v-list-item-icon>
@@ -261,9 +268,9 @@
 
         <v-spacer></v-spacer>
 
-          <v-btn icon > 
-            <v-icon color='#fff'> language</v-icon>
-          </v-btn>
+        <v-btn icon>
+          <v-icon color="#fff">language</v-icon>
+        </v-btn>
         <v-btn icon>
           <v-icon color="#fff">mail_outline</v-icon>
         </v-btn>
@@ -279,8 +286,9 @@
         <v-container fill-height>
           <v-layout justify-center align-center>
             <v-flex>
-              <dashboard v-if="first"></dashboard>
-              <organigramme v-if="organigramm"></organigramme>
+              <dashboardAdmin v-if="first"></dashboardAdmin>
+              <personelProf v-if="personelPr"></personelProf>
+              <personelAdministration v-if="personelAd"></personelAdministration>
             </v-flex>
           </v-layout>
         </v-container>
@@ -292,13 +300,15 @@
 
 
 <script>
-import organigramme from "../components/organigrame";
-import dashboard from "../components/dashboardDir";
+import personelAdministration from "../components/personelAdmin";
+import personelProf from "../components/personelProf";
+import dashboardAdmin from "../components/dashboardAdmin";
 export default {
   name: "supadmin",
   components: {
-    dashboard,
-    organigramme
+    dashboardAdmin,
+    personelProf,
+    personelAdministration
   },
   props: {
     source: String
@@ -308,8 +318,8 @@ export default {
     dialog: false,
     drawer: null,
     first: true,
-    organigramm: false,
-
+    personelPr: false,
+    personelAd: false,
     admins: [["Management", "people_outline"], ["Settings", "settings"]],
     cruds: [
       ["Create", "add"],
@@ -319,21 +329,27 @@ export default {
     ]
   }),
   methods: {
-    organigramme: function() {
+    personelProf: function() {
       this.first = false;
-      this.organigramm = true;
+      this.personelAd = false;
+      this.personelPr = true;
     },
 
+    personelAdmin: function() {
+      this.first = false;
+      this.personelPr = false;
+      this.personelAd = true;
+    },
     dashboarde: function() {
       this.first = true;
-      this.organigramm = false;
+      this.personelPr = false;
+      this.personelAd = false;
     }
   }
 };
 </script>
 
 <style lang='scss' scoped>
-
 @mixin ipad {
   @media (max-width: 768px) {
     @content;
@@ -354,7 +370,6 @@ export default {
 
     @include ipad {
       font-size: 1.5rem !important;
-     
     }
   }
   .v-btn__content {
