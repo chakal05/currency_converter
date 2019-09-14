@@ -248,10 +248,10 @@
                 <v-list-item-title>Parametres</v-list-item-title>
               </template>
 
-              <v-list-item>
+              <v-list-item @click="ParametresGen">
                 <v-list-item-title>Parametres generales</v-list-item-title>
                 <v-list-item-icon>
-                  <v-icon>people</v-icon>
+                  <v-icon>fas fa-cogs</v-icon>
                 </v-list-item-icon>
               </v-list-item>
             </v-list-group>
@@ -289,6 +289,7 @@
               <dashboardAdmin v-if="first"></dashboardAdmin>
               <personelProf v-if="personelPr"></personelProf>
               <personelAdministration v-if="personelAd"></personelAdministration>
+              <parametresGen v-if="parametresGeneral"></parametresGen>
             </v-flex>
           </v-layout>
         </v-container>
@@ -300,15 +301,17 @@
 
 
 <script>
-import personelAdministration from "../components/personelAdmin";
-import personelProf from "../components/personelProf";
-import dashboardAdmin from "../components/dashboardAdmin";
+import dashboardAdmin from "../components/admin/dashboardAdmin";
+import personelAdministration from "../components/admin/personelAdmin";
+import personelProf from "../components/admin/personelProf";
+import parametresGen from "../components/admin/parametreGeneral";
 export default {
   name: "supadmin",
   components: {
     dashboardAdmin,
     personelProf,
-    personelAdministration
+    personelAdministration,
+    parametresGen
   },
   props: {
     source: String
@@ -320,6 +323,7 @@ export default {
     first: true,
     personelPr: false,
     personelAd: false,
+    parametresGeneral : false,
     admins: [["Management", "people_outline"], ["Settings", "settings"]],
     cruds: [
       ["Create", "add"],
@@ -329,22 +333,33 @@ export default {
     ]
   }),
   methods: {
+     dashboarde: function() {
+      this.first = true;
+      this.personelPr = false;
+      this.personelAd = false;
+       this.parametresGeneral = false ;
+    },
     personelProf: function() {
       this.first = false;
       this.personelAd = false;
+       this.parametresGeneral = false;
       this.personelPr = true;
     },
 
     personelAdmin: function() {
       this.first = false;
       this.personelPr = false;
+       this.parametresGeneral = false;
       this.personelAd = true;
     },
-    dashboarde: function() {
-      this.first = true;
+
+    ParametresGen:  function() {
+      this.first = false;
       this.personelPr = false;
       this.personelAd = false;
+      this.parametresGeneral = true;
     }
+   
   }
 };
 </script>
