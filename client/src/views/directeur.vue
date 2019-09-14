@@ -30,12 +30,6 @@
                 </v-list-item-icon>
               </v-list-item>
 
-              <v-list-item @click="organigramme">
-                <v-list-item-title>Surveillants</v-list-item-title>
-                <v-list-item-icon>
-                  <v-icon>add_box</v-icon>
-                </v-list-item-icon>
-              </v-list-item>
             </v-list-group>
 
             <v-list-group prepend-icon="description">
@@ -43,10 +37,10 @@
                 <v-list-item-title>Scolarites</v-list-item-title>
               </template>
 
-              <v-list-item>
-                <v-list-item-title>Elèves par classe</v-list-item-title>
+              <v-list-item @click="organigramm">
+                <v-list-item-title>Classes</v-list-item-title>
                 <v-list-item-icon>
-                  <v-icon>fas fa-graduation-cap</v-icon>
+                  <v-icon>view_module</v-icon>
                 </v-list-item-icon>
               </v-list-item>
 

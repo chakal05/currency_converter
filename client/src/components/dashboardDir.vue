@@ -87,6 +87,7 @@
             :events="events"
             color="grey lighten-2"
             type="week"
+            locale="fr"
           >
             <!-- the events at the top (all-day) -->
             <template v-slot:day-header="{ date }">
@@ -158,6 +159,11 @@
 </template>
 
 <script>
+
+// todo 24 hours format for the calendar
+
+
+
 export default {
   data: () => ({
     dialog: false,
@@ -177,8 +183,9 @@ export default {
     ]
   }),
   methods: {
+
     save: function() {
-      //    todo here : events will be saved in the database and when retrieved, they will be displayed
+      //    todo here : post and retrieve from db
 
       if (this.titre && this.date && this.start && this.ends) {
         this.events.push({

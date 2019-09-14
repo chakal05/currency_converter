@@ -1,20 +1,26 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="desserts"
+    :items="profs"
     :search="search"
-    sort-by="calories"
+    sort-by="matiere"
     class="elevation-1"
   >
     <template v-slot:top>
       <v-toolbar flat color="white">
-        <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
+        <v-text-field
+          v-model="search"
+          append-icon="search"
+          label="Rechercher"
+          single-line
+          hide-details
+        ></v-text-field>
 
         <div class="flex-grow-1"></div>
 
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+            <v-btn color="#21398a" dark class="mb-2" v-on="on">Ajouter</v-btn>
           </template>
           <v-card>
             <v-card-title>
@@ -28,18 +34,16 @@
                     <v-text-field v-model="editedItem.Nom" label="Nom"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                   <v-avatar size=32>
-                     <v-img v-bind:src="editedItem.Photo" > </v-img>
-                   </v-avatar>
+                    <v-text-field v-model="editedItem.Matière" label="Matière"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.Matière" label="Fat (g)"></v-text-field>
+                    <v-text-field v-model="editedItem.Email" label="Email"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.Email" label="Carbs (g)"></v-text-field>
+                    <v-text-field v-model="editedItem.Téléphone" label="Téléphone"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.Téléphone" label="Protein (g)"></v-text-field>
+                    <v-text-field label="Mot de passe">******</v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -47,8 +51,8 @@
 
             <v-card-actions>
               <div class="flex-grow-1"></div>
-              <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+              <v-btn color="blue darken-4" text @click="close">Annuler</v-btn>
+              <v-btn color="blue darken-4" text @click="save">Enregistrer</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -59,7 +63,7 @@
       <v-icon small @click="deleteItem(item)">delete</v-icon>
     </template>
     <template v-slot:no-data>
-      <v-btn color="primary" @click="initialize">Reset</v-btn>
+      <v-btn color="#21398a" @click="initialize">Reset</v-btn>
     </template>
   </v-data-table>
 </template>
@@ -76,24 +80,21 @@ export default {
         sortable: false,
         value: "Nom"
       },
-      { text: "Photo", value: "Photo" },
       { text: "Matière", value: "Matière" },
       { text: "Email", value: "Email" },
       { text: "Téléphone", value: "Téléphone" },
       { text: "Actions", value: "action", sortable: false }
     ],
-    desserts: [],
+    profs: [],
     editedIndex: -1,
     editedItem: {
       Nom: "",
-      Photo: 0,
       Matière: 0,
       Email: 0,
       Téléphone: 0
     },
     defaultItem: {
       Nom: "",
-      Photo: 0,
       Matière: 0,
       Email: 0,
       Téléphone: 0
@@ -102,7 +103,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1 ? "Nouvel ajout" : "Changer";
     }
   },
 
@@ -113,95 +114,134 @@ export default {
   },
 
   created() {
+    this.changeLocale();
     this.initialize();
   },
 
   methods: {
+    changeLocale() {
+      this.$vuetify.lang.current = "fr";
+    },
+
     initialize() {
-      this.desserts = [
+      // todo Make a request to db and fill array  dynamically
+
+      this.profs = [
         {
-          Nom: "Frozen Yogurt",
-          Photo:  "../assets/comptable.png",
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0
+          Nom: "Farah Nour Mousa",
+          Matière: "Francais",
+          Email: "farah@hotmail.com",
+          Téléphone: 343434344
         },
         {
-          Nom: "Ice cream sandwich",
-          Photo: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3
+          Nom: "Amina Ali Moumin",
+          Matière: "Histoire/geographie",
+          Email: "farah@hotmail.com",
+          Téléphone: 343434344
         },
         {
-          Nom: "Eclair",
-          Photo: "../assets/comptable.png",
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0
+          Nom: "Farah Nour Mousa",
+          Matière: "Mathematique",
+          Email: "farah@hotmail.com",
+          Téléphone: 343434344
         },
         {
-          Nom: "Cupcake",
-          Photo: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3
+          Nom: "Khadra Souleiman Salah",
+          Matière: "Mathematique",
+          Email: "khadra@hotmail.com",
+          Téléphone: 452243444
         },
         {
-          Nom: "Gingerbread",
-          Photo: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9
+          Nom: "Farah Nour Mousa",
+          Matière: "Francais",
+          Email: "farah@hotmail.com",
+          Téléphone: 343434344
         },
         {
-          Nom: "Jelly bean",
-          Photo: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0
+          Nom: "Amina Ali Moumin",
+          Matière: "Histoire/geographie",
+          Email: "farah@hotmail.com",
+          Téléphone: 343434344
         },
         {
-          Nom: "Lollipop",
-          Photo: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0
+          Nom: "Farah Nour Mousa",
+          Matière: "Mathematique",
+          Email: "farah@hotmail.com",
+          Téléphone: 343434344
         },
         {
-          Nom: "Honeycomb",
-          Photo: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5
+          Nom: "Halima Mohamed Ali ",
+          Matière: "Anglais",
+          Email: "farah@hotmail.com",
+          Téléphone: 343434344
         },
         {
-          Nom: "Donut",
-          Photo: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9
+          Nom: "Farah Nour Mousa",
+          Matière: "Mathematique",
+          Email: "farah@hotmail.com",
+          Téléphone: 343434344
         },
         {
-          Nom: "KitKat",
-          Photo: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7
+          Nom: "Khadra Souleiman Salah",
+          Matière: "Mathematique",
+          Email: "khadra@hotmail.com",
+          Téléphone: 452243444
+        },
+        {
+          Nom: "Farah Nour Mousa",
+          Matière: "Francais",
+          Email: "farah@hotmail.com",
+          Téléphone: 343434344
+        },
+        {
+          Nom: "Farah Nour Mousa",
+          Matière: "Mathematique",
+          Email: "farah@hotmail.com",
+          Téléphone: 343434344
+        },
+        {
+          Nom: "Khadra Souleiman Salah",
+          Matière: "Mathematique",
+          Email: "khadra@hotmail.com",
+          Téléphone: 452243444
+        },
+        {
+          Nom: "Farah Nour Mousa",
+          Matière: "Francais",
+          Email: "farah@hotmail.com",
+          Téléphone: 343434344
+        },
+        {
+          Nom: "Farah Nour Mousa",
+          Matière: "Mathematique",
+          Email: "farah@hotmail.com",
+          Téléphone: 343434344
+        },
+        {
+          Nom: "Khadra Souleiman Salah",
+          Matière: "Mathematique",
+          Email: "khadra@hotmail.com",
+          Téléphone: 452243444
+        },
+        {
+          Nom: "Farah Nour Mousa",
+          Matière: "Francais",
+          Email: "farah@hotmail.com",
+          Téléphone: 343434344
         }
       ];
     },
 
     editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.profs.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
 
     deleteItem(item) {
-      const index = this.desserts.indexOf(item);
+      const index = this.profs.indexOf(item);
       confirm("Etes-vous sur de vouloir supprimer cet element?") &&
-        this.desserts.splice(index, 1);
+        this.profs.splice(index, 1);
     },
 
     close() {
@@ -214,9 +254,9 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+        Object.assign(this.profs[this.editedIndex], this.editedItem);
       } else {
-        this.desserts.push(this.editedItem);
+        this.profs.push(this.editedItem);
       }
       this.close();
     }
@@ -225,7 +265,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.v-card {
-  margin-top: 1rem;
-}
 </style>
