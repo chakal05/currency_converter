@@ -1,44 +1,37 @@
 
 <template>
-  <v-item-group>
-    <v-container>
-      <v-row>
-        <v-col
-          v-for="n in 3"
-          :key="n"
-          cols="12"
-          md="4"
-        >
-          <v-item v-slot:default="{ active, toggle }">
-            <v-card
-              :color="active ? 'primary' : ''"
-              class="d-flex align-center"
-              dark
-              height="200"
-              @click="toggle"
-            >
-              <v-scroll-y-transition>
-                <div
-                  v-if="active"
-                  class="display-3 flex-grow-1 text-center"
-                >
-                  Active
-                </div>
-              </v-scroll-y-transition>
-            </v-card>
-          </v-item>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-item-group>
+  <div class="d-flex justify-center">
+    <v-color-picker
+      :hide-canvas="true"
+      :hide-inputs="true"
+      class="ma-2"
+      show-swatches
+      swatches-max-height="300px"
+     @click="getColor"
+    ></v-color-picker>
+  </div>
 </template>
 
 <script>
 export default {
+  data: () => ({
+    swatches: [
+      ["#FF0000", "#AA0000", "#550000"],
+      ["#FFFF00", "#AAAA00", "#555500"],
+      ["#00FF00", "#00AA00", "#005500"],
+      ["#00FFFF", "#00AAAA", "#005555"],
+      ["#0000FF", "#0000AA", "#000055"]
+    ]
+  }),
 
-}
+  methods: () => ({
+    getColor: function() {
+      let item = document.querySelector('.v-color-picker__color');
+  
+    }
+  })
+};
 </script>
 
 <style>
-
 </style>

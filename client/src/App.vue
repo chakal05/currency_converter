@@ -1,15 +1,11 @@
 <template>
   <div id="app">
-      <!--   <home></home>           
-   <directeur></directeur>  -->
 
    <router-view></router-view>
   </div>
 </template>
 
 <script>
-//import home from "./views/home";
-//import directeur from "./views/directeur";
 export default {
   name: "App",
  
