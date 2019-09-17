@@ -2,21 +2,27 @@
   <v-container>
     <v-row>
       <v-col class="d-flex justify-center">
-        <v-color-picker :show-swatches="true" :hide-canvas="true"
-        :hide-inputs="true" swatches-max-height="300px"
-         v-model="color"></v-color-picker>
-         <v-btn color='primary' @click="fam"> Choosen color  </v-btn>
+        <v-color-picker
+          :show-swatches="true"
+          :hide-canvas="true"
+          :hide-inputs="true"
+          swatches-max-height="300px"
+          v-model="color"
+        ></v-color-picker>
       </v-col>
-     
+      <v-btn color="primary" @click="changeColor">change app color </v-btn>
     </v-row>
   </v-container>
 </template>
 <script>
+import dirView from "../../views/directeur";
 export default {
+   components: {
+    dirView
+  },
   data: () => ({
     type: "hex",
     hex: "#FF00FF",
-    couleur: ''
   }),
 
   computed: {
@@ -33,8 +39,8 @@ export default {
 
       return JSON.stringify(
         Object.keys(this.color).reduce((color, key) => {
-          color[key] = Number(this.color[key].toFixed(2))
-         return color;
+          color[key] = Number(this.color[key].toFixed(2));
+          return color;
         }, {}),
         null,
         2
@@ -43,10 +49,8 @@ export default {
   },
 
   methods: {
-    fam: function() {
-      if (this.color) {
-        alert(this.color);
-      }
+    changeColor : function(){
+      dirView.$data.couleur
     }
   }
 };

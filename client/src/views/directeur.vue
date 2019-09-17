@@ -44,7 +44,7 @@
                 <v-list-item-title>Scolarites</v-list-item-title>
               </template>
 
-              <v-list-item @click="dashboarde">
+              <v-list-item >
                 <v-list-item-title>Classes</v-list-item-title>
                 <v-list-item-icon>
                   <v-icon>view_module</v-icon>
@@ -259,7 +259,7 @@
         </v-list>
       </v-navigation-drawer>
 
-      <v-app-bar app clipped-left color="#21398a">
+      <v-app-bar app clipped-left :color="couleur">
         <v-app-bar-nav-icon color="#fff" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title class="mr-5 align-center">
           <span class="title">manedek</span>
@@ -324,6 +324,7 @@ export default {
     personelPr: false,
     personelAd: false,
     parametresGeneral : false,
+    couleur: '#283593',
     admins: [["Management", "people_outline"], ["Settings", "settings"]],
     cruds: [
       ["Create", "add"],
@@ -358,7 +359,8 @@ export default {
       this.personelPr = false;
       this.personelAd = false;
       this.parametresGeneral = true;
-    }
+    },
+
    
   }
 };
