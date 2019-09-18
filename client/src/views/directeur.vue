@@ -11,6 +11,7 @@
         </div>
         <v-list dense>
           <template>
+
             <v-list-item @click="dashboarde">
               <v-list-item-icon>
                 <v-icon>home</v-icon>
@@ -259,7 +260,7 @@
         </v-list>
       </v-navigation-drawer>
 
-      <v-app-bar app clipped-left :color="couleur">
+      <v-app-bar app clipped-left :color="baseColor">
         <v-app-bar-nav-icon color="#fff" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title class="mr-5 align-center">
           <span class="title">manedek</span>
@@ -286,6 +287,7 @@
         <v-container fill-height>
           <v-layout justify-center align-center>
             <v-flex>
+             
               <dashboardAdmin v-if="first"></dashboardAdmin>
               <personelProf v-if="personelPr"></personelProf>
               <personelAdministration v-if="personelAd"></personelAdministration>
@@ -305,6 +307,8 @@ import dashboardAdmin from "../components/admin/dashboardAdmin";
 import personelAdministration from "../components/admin/personelAdmin";
 import personelProf from "../components/admin/personelProf";
 import parametresGen from "../components/admin/parametreGeneral";
+import { mapGetters } from 'vuex';
+
 export default {
   name: "supadmin",
   components: {
@@ -317,6 +321,12 @@ export default {
     source: String
   },
 
+  computed : {
+    ...mapGetters([
+      'baseColor'
+    ])
+  },
+
   data: () => ({
     dialog: false,
     drawer: null,
@@ -324,7 +334,6 @@ export default {
     personelPr: false,
     personelAd: false,
     parametresGeneral : false,
-    couleur: '#283593',
     admins: [["Management", "people_outline"], ["Settings", "settings"]],
     cruds: [
       ["Create", "add"],
@@ -361,8 +370,10 @@ export default {
       this.parametresGeneral = true;
     },
 
-   
+  
   }
+   
+  
 };
 </script>
 

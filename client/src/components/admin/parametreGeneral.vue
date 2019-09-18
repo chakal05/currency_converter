@@ -10,15 +10,17 @@
           v-model="color"
         ></v-color-picker>
       </v-col>
-      <v-btn color="primary" @click="changeColor">change app color </v-btn>
+      <v-btn color="primary" @click="adminColor" >change app color </v-btn>
     </v-row>
   </v-container>
 </template>
 <script>
-import dirView from "../../views/directeur";
+
+import { mapMutations } from 'vuex';
+
 export default {
    components: {
-    dirView
+   
   },
   data: () => ({
     type: "hex",
@@ -49,10 +51,14 @@ export default {
   },
 
   methods: {
-    changeColor : function(){
-      dirView.$data.couleur
-    }
+    ...mapMutations (['setColor']),
+    
+     adminColor: function(){
+    this.setColor(this.color);
   }
+  },
+
+ 
 };
 </script>
 
