@@ -9,22 +9,33 @@
           swatches-max-height="300px"
           v-model="color"
         ></v-color-picker>
+        <v-btn color="primary" @click="adminColor">change app color</v-btn>
       </v-col>
-      <v-btn color="primary" @click="adminColor" >change app color </v-btn>
+
+      <v-col class="d-flex justify-center">
+        <v-file-input
+          :rules="rules"
+          accept="image/*"
+          label="Choisir un logo"
+          filled
+          prepend-icon="mdi-camera"
+          @click="adminLogo"
+        ></v-file-input>
+      </v-col>
     </v-row>
   </v-container>
 </template>
 <script>
-
-import { mapMutations } from 'vuex';
+import { mapMutations} from "vuex";
 
 export default {
-   components: {
-   
-  },
+  components: {},
   data: () => ({
     type: "hex",
     hex: "#FF00FF",
+     rules: [
+        value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
+      ],
   }),
 
   computed: {
@@ -47,18 +58,25 @@ export default {
         null,
         2
       );
-    }
+    },
+
   },
 
   methods: {
-    ...mapMutations (['setColor']),
-    
-     adminColor: function(){
-    this.setColor(this.color);
-  }
-  },
+    ...mapMutations(["setColor" , "setLogo"]),
 
- 
+    adminColor: function() {
+      this.setColor(this.color);
+    },
+
+    adminLogo: function(){
+      this.setLogo(this.value);
+    },
+
+    fli : function(){
+      alert(this.value);
+    }
+  }
 };
 </script>
 

@@ -6,12 +6,12 @@
           <v-app-bar-nav-icon class="bar" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
           <v-toolbar-title class="mr-5 align-center">
             <span>manedek</span>
+            <v-icon class="trending">trending_up</v-icon>
           </v-toolbar-title>
-          <v-icon class="trending">trending_up</v-icon>
         </div>
+
         <v-list dense>
           <template>
-
             <v-list-item @click="dashboarde">
               <v-list-item-icon>
                 <v-icon>home</v-icon>
@@ -34,8 +34,7 @@
               <v-list-item @click="personelProf">
                 <v-list-item-title>Professeurs</v-list-item-title>
                 <v-list-item-icon>
-                  <v-icon> fas fa-chalkboard-teacher
-                  </v-icon>
+                  <v-icon>fas fa-chalkboard-teacher</v-icon>
                 </v-list-item-icon>
               </v-list-item>
             </v-list-group>
@@ -45,7 +44,7 @@
                 <v-list-item-title>Scolarites</v-list-item-title>
               </template>
 
-              <v-list-item >
+              <v-list-item>
                 <v-list-item-title>Classes</v-list-item-title>
                 <v-list-item-icon>
                   <v-icon>view_module</v-icon>
@@ -260,12 +259,21 @@
         </v-list>
       </v-navigation-drawer>
 
-      <v-app-bar app clipped-left :color="baseColor">
+      <v-app-bar app clipped-left :color="defaultColor">
         <v-app-bar-nav-icon color="#fff" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
         <v-toolbar-title class="mr-5 align-center">
+          <!--
           <span class="title">manedek</span>
+          <v-icon color="#fff" class="mx-3">trending_up</v-icon>
+          -->
+          <v-img
+            :src="defaultLogo"
+            lazy-src="https://picsum.photos/id/11/10/6"
+            max-width="161"
+            max-height="40"
+          ></v-img>
         </v-toolbar-title>
-        <v-icon color="#fff" class="mx-3">trending_up</v-icon>
 
         <v-spacer></v-spacer>
 
@@ -287,7 +295,6 @@
         <v-container fill-height>
           <v-layout justify-center align-center>
             <v-flex>
-             
               <dashboardAdmin v-if="first"></dashboardAdmin>
               <personelProf v-if="personelPr"></personelProf>
               <personelAdministration v-if="personelAd"></personelAdministration>
@@ -303,11 +310,13 @@
 
 
 <script>
+//todo Logo and app-bar color should be retrieved from db
+
 import dashboardAdmin from "../components/admin/dashboardAdmin";
 import personelAdministration from "../components/admin/personelAdmin";
 import personelProf from "../components/admin/personelProf";
 import parametresGen from "../components/admin/parametreGeneral";
-import { mapGetters } from 'vuex';
+import { mapState } from "vuex";
 
 export default {
   name: "supadmin",
@@ -321,10 +330,8 @@ export default {
     source: String
   },
 
-  computed : {
-    ...mapGetters([
-      'baseColor'
-    ])
+  computed: {
+    ...mapState(["defaultColor" , "defaultLogo"])
   },
 
   data: () => ({
@@ -333,7 +340,7 @@ export default {
     first: true,
     personelPr: false,
     personelAd: false,
-    parametresGeneral : false,
+    parametresGeneral: false,
     admins: [["Management", "people_outline"], ["Settings", "settings"]],
     cruds: [
       ["Create", "add"],
@@ -343,37 +350,33 @@ export default {
     ]
   }),
   methods: {
-     dashboarde: function() {
+    dashboarde: function() {
       this.first = true;
       this.personelPr = false;
       this.personelAd = false;
-       this.parametresGeneral = false ;
+      this.parametresGeneral = false;
     },
     personelProf: function() {
       this.first = false;
       this.personelAd = false;
-       this.parametresGeneral = false;
+      this.parametresGeneral = false;
       this.personelPr = true;
     },
 
     personelAdmin: function() {
       this.first = false;
       this.personelPr = false;
-       this.parametresGeneral = false;
+      this.parametresGeneral = false;
       this.personelAd = true;
     },
 
-    ParametresGen:  function() {
+    ParametresGen: function() {
       this.first = false;
       this.personelPr = false;
       this.personelAd = false;
       this.parametresGeneral = true;
-    },
-
-  
+    }
   }
-   
-  
 };
 </script>
 
@@ -407,20 +410,9 @@ export default {
   }
   .mx-3 {
     position: relative;
-    left: -2.4rem;
-    top: 0.08rem;
+    left: -1.1rem;
+    top: -3px;
     font-size: 35px;
-  }
-  .v-list-item__content {
-    a {
-      text-decoration: none;
-      .v-list-item__title {
-        color: black;
-      }
-    }
-    a:hover .v-list-item__title {
-      font-size: 14px;
-    }
   }
 
   .logo-gris {
@@ -433,16 +425,16 @@ export default {
     }
 
     span {
-      font-size: 2rem;
+      font-size: 1.5rem;
       margin-left: 1rem;
     }
 
     .trending {
       font-size: 35px;
       position: relative;
-      left: -1.59rem;
-      top: 0.5rem;
-      color: #282828;
+      left: -0.3rem;
+      top: -0.13rem;
+      color: #4e4c4c;
     }
 
     .bar {
