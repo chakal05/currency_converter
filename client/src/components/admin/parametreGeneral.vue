@@ -13,29 +13,28 @@
       </v-col>
 
       <v-col class="d-flex justify-center">
-        <v-file-input
-          :rules="rules"
-          accept="image/*"
-          label="Choisir un logo"
-          filled
-          prepend-icon="mdi-camera"
-          @click="adminLogo"
-        ></v-file-input>
+        <form @submit.prevent="sendFile" enctype="multipart/form-data" >
+          <v-file-input 
+            label="Logo"
+            type="file"
+            prepend-icon="mdi-camera"
+            @change="selectFile"
+          ></v-file-input>
+          <v-btn color="primary" type="submit">Envoyer</v-btn>
+        </form>
       </v-col>
     </v-row>
   </v-container>
 </template>
 <script>
-import { mapMutations} from "vuex";
-
+import { mapMutations } from "vuex";
+import getData from "../../services/getData";
 export default {
   components: {},
   data: () => ({
     type: "hex",
     hex: "#FF00FF",
-     rules: [
-        value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
-      ],
+    file: ""
   }),
 
   computed: {
@@ -58,23 +57,30 @@ export default {
         null,
         2
       );
-    },
-
+    }
   },
 
   methods: {
-    ...mapMutations(["setColor" , "setLogo"]),
+    ...mapMutations(["setColor", "setLogo"]),
 
     adminColor: function() {
       this.setColor(this.color);
     },
 
-    adminLogo: function(){
-      this.setLogo(this.value);
+    adminLogo: function() {
+      this.setLogo(this.value); 
     },
 
-    fli : function(){
-      alert(this.value);
+    selectFile(event) {
+     this.file = event ;
+      console.log(this.file);
+    },
+
+    async sendFile() {
+      let formData = new FormData();
+      formData.append("file", this.file);
+
+      await getData.loadLogo(formData);
     }
   }
 };

@@ -130,18 +130,7 @@
               </v-list-group>
             </v-list-group>
 
-            <v-list-group prepend-icon="account_circle">
-              <template v-slot:activator>
-                <v-list-item-title>Comptes</v-list-item-title>
-              </template>
-
-              <v-list-item>
-                <v-list-item-title>Management</v-list-item-title>
-                <v-list-item-icon>
-                  <v-icon>people</v-icon>
-                </v-list-item-icon>
-              </v-list-item>
-            </v-list-group>
+          
 
             <v-list-group prepend-icon="alarm">
               <template v-slot:activator>
@@ -254,6 +243,13 @@
                   <v-icon>fas fa-cogs</v-icon>
                 </v-list-item-icon>
               </v-list-item>
+
+              <v-list-item @click="ParametresGen">
+                <v-list-item-title>Parametres compte</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>account_circle</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
             </v-list-group>
           </template>
         </v-list>
@@ -268,8 +264,7 @@
           <v-icon color="#fff" class="mx-3">trending_up</v-icon>
           -->
           <v-img
-            :src="defaultLogo"
-            lazy-src="https://picsum.photos/id/11/10/6"
+             :src="require('../assets/logoPics/' + defaultLogo)"
             max-width="161"
             max-height="40"
           ></v-img>
