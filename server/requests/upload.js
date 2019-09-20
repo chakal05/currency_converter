@@ -12,7 +12,7 @@ router.post('/', upload = customLogo.single("file"), (req, res) => {
 
 
     if(upload){
-    res.json({status : req.file.filename});
+    res.json({status : 200});
     }
  
 })
