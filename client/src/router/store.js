@@ -10,7 +10,7 @@ Vue.use(vuex)
 export default new vuex.Store({
     state : {
         defaultColor : '#283593',
-        defaultLogo : 'aaron-burden-6jYoil2GhVk-unsplash.jpg'
+        defaultLogo : 'logEx.png'
     },
 
   //  getters : {

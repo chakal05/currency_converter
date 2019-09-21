@@ -65,6 +65,7 @@
     <template v-slot:no-data>
       <v-btn color="#21398a" @click="initialize">Reset</v-btn>
     </template>
+
   </v-data-table>
 </template>
 
@@ -75,29 +76,26 @@ export default {
     search: "",
     headers: [
       {
-        text: "Nom",
+        text: "Salle",
         align: "left",
         sortable: false,
         value: "Nom"
       },
-      { text: "Matière", value: "Matière" },
-      { text: "Email", value: "Email" },
-      { text: "Téléphone", value: "Téléphone" },
+      { text: "Capacite d'accueil", value: "Capacite" },
+      { text: "Type", value: "Type" },
       { text: "Actions", value: "action", sortable: false }
     ],
     profs: [],
     editedIndex: -1,
     editedItem: {
       Nom: "",
-      Matière: 0,
-      Email: 0,
-      Téléphone: 0
+     Type: 0,
+     Capacite: 0
     },
     defaultItem: {
       Nom: "",
-      Matière: 0,
-      Email: 0,
-      Téléphone: 0
+      Type: 0,
+     Capacite:0
     }
   }),
 
@@ -128,107 +126,18 @@ export default {
 
       this.profs = [
         {
-          Nom: "Farah Nour Mousa",
-          Matière: "Francais",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
+          Nom: "02",
+          Type: "Normal",
+          Capacite: "30"
         },
+      
         {
-          Nom: "Amina Ali Moumin",
-          Matière: "Histoire/geographie",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
+           Nom: "13",
+          Type: "Laboratoire",
+          Capacite: "15"
         },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Mathematique",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Khadra Souleiman Salah",
-          Matière: "Mathematique",
-          Email: "khadra@hotmail.com",
-          Téléphone: 452243444
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Francais",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Amina Ali Moumin",
-          Matière: "Histoire/geographie",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Mathematique",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Halima Mohamed Ali ",
-          Matière: "Anglais",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Mathematique",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Khadra Souleiman Salah",
-          Matière: "Mathematique",
-          Email: "khadra@hotmail.com",
-          Téléphone: 452243444
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Francais",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Mathematique",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Khadra Souleiman Salah",
-          Matière: "Mathematique",
-          Email: "khadra@hotmail.com",
-          Téléphone: 452243444
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Francais",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Mathematique",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Khadra Souleiman Salah",
-          Matière: "Mathematique",
-          Email: "khadra@hotmail.com",
-          Téléphone: 452243444
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Francais",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        }
+       
+       
       ];
     },
 

@@ -30,13 +30,6 @@
                   <v-icon>fas fa-users-cog</v-icon>
                 </v-list-item-icon>
               </v-list-item>
-
-              <v-list-item @click="personelProf">
-                <v-list-item-title>Professeurs</v-list-item-title>
-                <v-list-item-icon>
-                  <v-icon>fas fa-chalkboard-teacher</v-icon>
-                </v-list-item-icon>
-              </v-list-item>
             </v-list-group>
 
             <v-list-group prepend-icon="description">
@@ -129,8 +122,6 @@
                 </v-list-item>
               </v-list-group>
             </v-list-group>
-
-          
 
             <v-list-group prepend-icon="alarm">
               <template v-slot:activator>
@@ -238,14 +229,35 @@
               </template>
 
               <v-list-item @click="ParametresGen">
-                <v-list-item-title>Parametres generales</v-list-item-title>
+                <v-list-item-title>Ecole</v-list-item-title>
                 <v-list-item-icon>
-                  <v-icon>fas fa-cogs</v-icon>
+                  <v-icon>fas fa-school</v-icon>
                 </v-list-item-icon>
               </v-list-item>
 
-              <v-list-item @click="ParametresGen">
-                <v-list-item-title>Parametres compte</v-list-item-title>
+              <v-list-item @click="showSection">
+                <v-list-item-title>Filliere</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>fas fa-chalkboard</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+
+              <v-list-item @click="personelProf">
+                <v-list-item-title>Professeurs</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>fas fa-chalkboard-teacher</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+
+              <v-list-item @click="showRoom">
+                <v-list-item-title>Salles</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon>fas fa-door-open</v-icon>
+                </v-list-item-icon>
+              </v-list-item>
+
+              <v-list-item @click="ParametresPRofil">
+                <v-list-item-title>Profil</v-list-item-title>
                 <v-list-item-icon>
                   <v-icon>account_circle</v-icon>
                 </v-list-item-icon>
@@ -264,7 +276,7 @@
           <v-icon color="#fff" class="mx-3">trending_up</v-icon>
           -->
           <v-img
-             :src="require('../assets/logoPics/' + defaultLogo)"
+            :src="require('../assets/logoPics/' + defaultLogo)"
             max-width="161"
             max-height="40"
           ></v-img>
@@ -290,10 +302,13 @@
         <v-container fill-height>
           <v-layout justify-center align-center>
             <v-flex>
-              <dashboardAdmin v-if="first"></dashboardAdmin>
-              <personelProf v-if="personelPr"></personelProf>
+              <adminDashboad v-if="first"></adminDashboad>
+              <teachers v-if="personelPr"></teachers>
               <personelAdministration v-if="personelAd"></personelAdministration>
-              <parametresGen v-if="parametresGeneral"></parametresGen>
+              <school v-if="parametresGeneral"></school>
+              <profilSettings v-if="parametreSProfil"></profilSettings>
+              <sections v-if="secTions"></sections>
+              <rooms v-if="room"></rooms>
             </v-flex>
           </v-layout>
         </v-container>
@@ -307,26 +322,32 @@
 <script>
 //todo Logo and app-bar color should be retrieved from db
 
-import dashboardAdmin from "../components/admin/dashboardAdmin";
+import adminDashboad from "../components/admin/adminDashboard";
 import personelAdministration from "../components/admin/personelAdmin";
-import personelProf from "../components/admin/personelProf";
-import parametresGen from "../components/admin/parametreGeneral";
+import school from "../components/admin/school";
+import sections from "../components/admin/sections";
+import teachers from "../components/admin/teachers";
+import rooms from "../components/admin/rooms";
+import profilSettings from "../components/admin/profilSettings";
 import { mapState } from "vuex";
 
 export default {
   name: "supadmin",
   components: {
-    dashboardAdmin,
-    personelProf,
+    adminDashboad,
+    teachers,
     personelAdministration,
-    parametresGen
+    school,
+    sections,
+    rooms,
+    profilSettings
   },
   props: {
     source: String
   },
 
   computed: {
-    ...mapState(["defaultColor" , "defaultLogo"])
+    ...mapState(["defaultColor", "defaultLogo"])
   },
 
   data: () => ({
@@ -336,6 +357,9 @@ export default {
     personelPr: false,
     personelAd: false,
     parametresGeneral: false,
+    parametreSProfil: false,
+    secTions: false,
+    room: false,
     admins: [["Management", "people_outline"], ["Settings", "settings"]],
     cruds: [
       ["Create", "add"],
@@ -350,11 +374,17 @@ export default {
       this.personelPr = false;
       this.personelAd = false;
       this.parametresGeneral = false;
+      this.parametreSProfil = false;
+      this.room = false;
+      this.secTions = false;
     },
     personelProf: function() {
       this.first = false;
       this.personelAd = false;
       this.parametresGeneral = false;
+      this.parametreSProfil = false;
+      this.secTions = false;
+      this.room = false;
       this.personelPr = true;
     },
 
@@ -362,6 +392,9 @@ export default {
       this.first = false;
       this.personelPr = false;
       this.parametresGeneral = false;
+      this.parametreSProfil = false;
+      this.secTions = false;
+      this.room = false;
       this.personelAd = true;
     },
 
@@ -369,7 +402,40 @@ export default {
       this.first = false;
       this.personelPr = false;
       this.personelAd = false;
+      this.parametreSProfil = false;
+      this.secTions = false;
+      this.room = false;
       this.parametresGeneral = true;
+    },
+
+    ParametresPRofil: function() {
+      this.first = false;
+      this.personelPr = false;
+      this.personelAd = false;
+      this.parametresGeneral = false;
+      this.secTions = false;
+      this.room = false;
+      this.parametreSProfil = true;
+    },
+
+    showSection() {
+      this.first = false;
+      this.personelPr = false;
+      this.personelAd = false;
+      this.parametresGeneral = false;
+      this.parametreSProfil = false;
+      this.room = false;
+      this.secTions = true;
+    },
+
+    showRoom() {
+      this.first = false;
+      this.personelPr = false;
+      this.personelAd = false;
+      this.parametresGeneral = false;
+      this.parametreSProfil = false;
+      this.secTions = false;
+      this.room = true;
     }
   }
 };
