@@ -7,6 +7,10 @@
     class="elevation-1"
   >
     <template v-slot:top>
+       <v-card-title>
+          Professeurs
+         <div class="flex-grow-1"></div>
+        </v-card-title>
       <v-toolbar flat color="white">
         <v-text-field
           v-model="search"
@@ -153,96 +157,6 @@ export default {
            Adresse: "26 Balbala Cheikh Moussa, Djibouti",
           Diplome: " Licence Histoire/ geographie",
           Sexe: "Femme"
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Mathematique",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Khadra Souleiman Salah",
-          Matière: "Mathematique",
-          Email: "khadra@hotmail.com",
-          Téléphone: 452243444
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Francais",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Amina Ali Moumin",
-          Matière: "Histoire/geographie",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Mathematique",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Halima Mohamed Ali ",
-          Matière: "Anglais",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Mathematique",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Khadra Souleiman Salah",
-          Matière: "Mathematique",
-          Email: "khadra@hotmail.com",
-          Téléphone: 452243444
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Francais",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Mathematique",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Khadra Souleiman Salah",
-          Matière: "Mathematique",
-          Email: "khadra@hotmail.com",
-          Téléphone: 452243444
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Francais",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Mathematique",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
-        },
-        {
-          Nom: "Khadra Souleiman Salah",
-          Matière: "Mathematique",
-          Email: "khadra@hotmail.com",
-          Téléphone: 452243444
-        },
-        {
-          Nom: "Farah Nour Mousa",
-          Matière: "Francais",
-          Email: "farah@hotmail.com",
-          Téléphone: 343434344
         }
       ];
     },

@@ -257,7 +257,7 @@
               </v-list-item>
 
               <v-list-item @click="ParametresPRofil">
-                <v-list-item-title>Profil</v-list-item-title>
+                <v-list-item-title>Profile</v-list-item-title>
                 <v-list-item-icon>
                   <v-icon>account_circle</v-icon>
                 </v-list-item-icon>

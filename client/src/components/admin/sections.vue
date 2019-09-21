@@ -1,4 +1,5 @@
 <template>
+
   <v-data-table
     :headers="headers"
     :items="profs"
@@ -7,6 +8,10 @@
     class="elevation-1"
   >
     <template v-slot:top>
+      <v-card-title>
+          Filliere 
+         <div class="flex-grow-1"></div>
+        </v-card-title>
       <v-toolbar flat color="white">
         <v-text-field
           v-model="search"
@@ -66,6 +71,7 @@
       <v-btn color="#21398a" @click="initialize">Reset</v-btn>
     </template>
   </v-data-table>
+
 </template>
 
 <script>
@@ -82,7 +88,6 @@ export default {
       },
       { text: "Code", value: "Code" },
       { text: "Duree / an", value: "Duree" },
-      { text: "Matieres", value: "Matieres" },
       { text: "Niveau", value: "Niveau" },
       { text: "Capacite d'accueil", value: "Capacite" },
       { text: "Actions", value: "action", sortable: false }
@@ -91,7 +96,6 @@ export default {
     editedIndex: -1,
     editedItem: {
       Nom: "",
-      Matieres: 0,
       Code: 0,
       Duree: 0,
       Niveau: "",
@@ -99,7 +103,6 @@ export default {
     },
     defaultItem: {
       Nom: "",
-      Matieres: 0,
       Code: 0,
       Duree: 0,
       Niveau: "",
@@ -135,7 +138,6 @@ export default {
       this.profs = [
         {
           Nom: "Scientifique",
-          Matieres: "Francais, Mathematique",
           Code: "M32DF",
           Duree: 2,
           Niveau: " Lycee",
@@ -144,7 +146,6 @@ export default {
       
         {
            Nom: "Litteraire",
-          Matieres: "Francais, Mathematique",
           Code: "L32JL",
           Duree: 2,
           Niveau: " Lycee",

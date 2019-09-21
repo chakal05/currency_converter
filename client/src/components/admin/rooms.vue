@@ -7,6 +7,10 @@
     class="elevation-1"
   >
     <template v-slot:top>
+       <v-card-title>
+          Salles de cours 
+         <div class="flex-grow-1"></div>
+        </v-card-title>
       <v-toolbar flat color="white">
         <v-text-field
           v-model="search"
