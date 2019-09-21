@@ -1,9 +1,9 @@
 <template>
-  <v-container>
-    <v-row align="center" justify="center">
+    <v-container>
+    <v-row align="center" justify="center" class="mainRow">
       <!-- To do : make changes accordingly    -->
 
-      <v-col class="elevation-2">
+      <v-col class="elevation-2" cols="12" md="10">
         <v-row>
           <v-card-title>
             Mon profil
@@ -62,10 +62,10 @@
 
           <v-row align="center" justify="center">
             <v-col>
-              <v-btn color="success" class="mr-4" @click="validate">Validate</v-btn>
+              <v-btn color="success" class="mr-4" @click="validate">Valider</v-btn>
             </v-col>
 
-            <v-btn color="error" class="mr-4" @click="reset">Reset Form</v-btn>
+            <v-btn color="error" class="mr-4" @click="reset">Annuler</v-btn>
           </v-row>
         </form>
       </v-col>
@@ -77,12 +77,12 @@
 export default {};
 </script>
 
-<style lang="scss" scoped>
-.container {
-  .row {
-    .col {
-      background-color: #fff;
+<style lang='scss' scoped>
+    .container{
+      .mainRow{
+     .elevation-2 {
+       background-color: #fff;
+     }   
     }
-  }
-}
+    }
 </style>

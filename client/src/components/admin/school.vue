@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row align="center" justify="center">
-      <v-col class="elevation-2 forme">
+      <v-col cols="12" md="10" class="elevation-2 forme">
         <v-row>
           <v-card-title>
             Fiche de l'ecole
@@ -32,7 +32,12 @@
             </v-col>
 
             <v-col cols="12" md="4">
-              <v-text-field v-model="email" :rules="emailRules" label="Telephone de l'ecole" required></v-text-field>
+              <v-text-field
+                v-model="email"
+                :rules="emailRules"
+                label="Telephone de l'ecole"
+                required
+              ></v-text-field>
             </v-col>
           </v-row>
 
@@ -122,18 +127,13 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-         
           </v-row>
-             <div class="flex-grow-1"></div>
+          <div class="flex-grow-1"></div>
           <v-row align="center" justify="center">
             <v-col>
-
-              <v-btn :disabled="!valid"  @click="validate">Validate</v-btn>
+              <v-btn :disabled="!valid" @click="validate">Valider</v-btn>
             </v-col>
-
-
-              <v-btn color="error" @click="reset">Reset Form</v-btn>
-             
+            <v-btn class="redBtn" color="error" @click="reset">Annuler</v-btn>
            
           </v-row>
         </form>
@@ -152,7 +152,6 @@ export default {
     file: "",
     dialog: null,
     theme: "#283593"
-    
   }),
 
   computed: {
@@ -194,7 +193,6 @@ export default {
 
     selectFile(event) {
       this.file = event;
-     
     },
 
     async sendFile() {
@@ -217,6 +215,10 @@ export default {
   .row {
     .forme {
       background-color: #fff;
+    }
+
+    .redBtn{
+      margin-right: .7rem;
     }
   }
 }

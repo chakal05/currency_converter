@@ -1,6 +1,10 @@
 <template>
+<v-row align="center" justify="center">
 
-  <v-data-table
+
+  <v-col cols="12" md="10">
+
+<v-data-table
     :headers="headers"
     :items="profs"
     :search="search"
@@ -72,6 +76,10 @@
     </template>
   </v-data-table>
 
+
+  </v-col>
+
+</v-row>
 </template>
 
 <script>

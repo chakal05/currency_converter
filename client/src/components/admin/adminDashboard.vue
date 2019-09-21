@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="premierTitre">
-      <h2>Tableau de bord</h2>
+      <v-card-title>Tableau de bord</v-card-title>
 
       <v-row>
         <v-dialog v-model="dialog" persistent max-width="600px">
@@ -74,12 +74,14 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <div class="flex-grow-1"></div>
       </v-row>
     </div>
 
     <v-row>
-      <v-col>
-        <v-sheet width="85%" height="700" class="calendrier">
+      <div class="flex-grow-1"></div>
+      <v-col cols="12" md="8">
+        <v-sheet height="700" class="calendrier">
           <v-calendar
             ref="calendar"
             :now="today"
@@ -119,8 +121,9 @@
           </v-calendar>
         </v-sheet>
       </v-col>
+      <div class="flex-grow-1"></div>
 
-      <div class="cartes">
+      <v-col cols="12" md="3" class="cartes">
         <v-card outlined color="#223C8A">
           <v-list-item three-line>
             <v-list-item-content>
@@ -153,16 +156,13 @@
             </v-list-item-content>
           </v-list-item>
         </v-card>
-      </div>
+      </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
-
 // todo 24 hours format for the calendar
-
-
 
 export default {
   data: () => ({
@@ -183,7 +183,6 @@ export default {
     ]
   }),
   methods: {
-
     save: function() {
       //    todo here : post and retrieve from db
 
@@ -203,7 +202,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @mixin ipad {
   @media (max-width: 768px) {
     @content;
@@ -211,72 +210,50 @@ export default {
 }
 
 .premierTitre {
-  width: 87.5%;
+  width: 92%;
   margin: auto;
-
   @include ipad {
     padding-left: 0;
     text-align: center;
   }
-
-  h4 {
-    margin-top: 0.5rem;
+  .v-card__title {
+    margin-left: -1rem;
   }
-
   .row {
     @include ipad {
       display: flex;
       justify-content: center;
     }
     .v-btn {
-      margin: 0.5rem;
-
+      margin-left: .5rem;
+      margin-bottom: .5rem;
       @include ipad {
         margin: 1rem;
       }
-
       .v-icon {
         margin-left: 1rem;
       }
     }
   }
 }
-.col {
-  max-width: 80% !important;
-
-  @include ipad {
-   margin: auto;
-  max-width: 100% !important;
-  }
-}
-.calendrier {
-  margin: auto;
-
-
-  .v-calendar {
-    .v-btn {
-     
-    }
-  }
-}
 
 .cartes {
-  @include ipad {
-    width: 100%;
-  }
+  margin-right: 1rem;
+  padding-top: 1rem;
+
   .v-card {
     text-align: center;
-    margin-top: 1rem;
+    margin-top: 0.7rem;
     margin-right: 1rem;
     height: 160px;
     padding-top: 2rem;
     font-weight: bold;
 
-     @include ipad {
-    width: 80%;
-    margin: auto;
-    margin-top: 1rem;
-  }
+    @include ipad {
+      width: 90%;
+      margin: auto;
+      margin-top: 1rem;
+    }
   }
 
   .headline {
