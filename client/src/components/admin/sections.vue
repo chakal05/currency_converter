@@ -1,15 +1,12 @@
 <template>
 <v-row align="center" justify="center">
-
-
   <v-col cols="12" md="10">
-
 <v-data-table
     :headers="headers"
     :items="profs"
     :search="search"
     sort-by="matiere"
-    class="elevation-1"
+    class="elevation-5"
   >
     <template v-slot:top>
       <v-card-title>

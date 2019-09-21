@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row align="center" justify="center">
-      <v-col cols="12" md="10" class="elevation-2 forme">
+      <v-col cols="12" md="10" class="elevation-5 forme">
         <v-row>
           <v-card-title>
             Fiche de l'ecole

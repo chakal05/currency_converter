@@ -4,7 +4,7 @@
     :items="profs"
     :search="search"
     sort-by="matiere"
-    class="elevation-1"
+    class="elevation-5"
   >
     <template v-slot:top>
       <v-toolbar flat color="white">

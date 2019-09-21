@@ -3,7 +3,7 @@
     <v-row align="center" justify="center" class="mainRow">
       <!-- To do : make changes accordingly    -->
 
-      <v-col class="elevation-2" cols="12" md="10">
+      <v-col class="elevation-5" cols="12" md="10">
         <v-row>
           <v-card-title>
             Mon profil
@@ -80,7 +80,7 @@ export default {};
 <style lang='scss' scoped>
     .container{
       .mainRow{
-     .elevation-2 {
+     .elevation-5 {
        background-color: #fff;
      }   
     }

@@ -239,7 +239,7 @@ export default {
 
 .cartes {
   margin-right: 1rem;
-  padding-top: 1rem;
+  padding-top: .7rem;
 
   .v-card {
     text-align: center;
