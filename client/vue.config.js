@@ -1,10 +1,6 @@
 module.exports = {
   devServer: {
-    proxy: {
-      "/requests": {
-        target: "http://localhost:5000"
-      }
-    }
+    proxy: "http://localhost:5000"
   },
   runtimeCompiler: true,
   chainWebpack: config => {

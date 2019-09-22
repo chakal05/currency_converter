@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+  <v-container>
     <v-row align="center" justify="center" class="mainRow">
       <!-- To do : make changes accordingly    -->
 
@@ -39,12 +39,10 @@
 
           <v-row align="center" justify="center">
             <v-col cols="12" md="5">
-              <v-text-field v-model="email"  label="Telephone" required></v-text-field>
+              <v-text-field v-model="email" label="Telephone" required></v-text-field>
             </v-col>
 
-        
-
-          <v-col cols="12" md="5">
+            <v-col cols="12" md="5">
               <v-file-input
                 label="Changer la photo de profil"
                 type="file"
@@ -56,9 +54,7 @@
 
           <v-text-field v-model="email" :rules="emailRules" label="Adresse" required></v-text-field>
 
-          <v-row>
-            
-          </v-row>
+          <v-row></v-row>
 
           <v-row align="center" justify="center">
             <v-col>
@@ -78,11 +74,11 @@ export default {};
 </script>
 
 <style lang='scss' scoped>
-    .container{
-      .mainRow{
-     .elevation-5 {
-       background-color: #fff;
-     }   
+.container {
+  .mainRow {
+    .elevation-5 {
+      background-color: #fff;
     }
-    }
+  }
+}
 </style>

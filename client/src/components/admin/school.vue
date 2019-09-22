@@ -1,5 +1,7 @@
 <template>
   <v-container>
+    <v-img :src= load  ></v-img>
+
     <v-row align="center" justify="center">
       <v-col cols="12" md="10" class="elevation-5 forme">
         <v-row>
@@ -9,7 +11,9 @@
           </v-card-title>
         </v-row>
 
-        <form @submit.prevent="sendFile" enctype="multipart/form-data">
+        <!-- @submit.prevent="sendFile" -->
+
+        <form action="/upload" method="POST" enctype="multipart/form-data">
           <v-row>
             <v-col cols="12" md="4">
               <v-text-field
@@ -102,7 +106,13 @@
                 label="Adresse"
                 required
               ></v-text-field>
-              <v-file-input label="Logo" type="file" prepend-icon="mdi-camera" @change="selectFile"></v-file-input>
+              <v-file-input
+                label="Logo"
+                type="file"
+                name="file"
+                prepend-icon="mdi-camera"
+                @change="selectFile"
+              ></v-file-input>
             </v-col>
           </v-row>
 
@@ -131,10 +141,9 @@
           <div class="flex-grow-1"></div>
           <v-row align="center" justify="center">
             <v-col>
-              <v-btn :disabled="!valid" @click="validate">Valider</v-btn>
+              <v-btn color="success" @click="sendFile">Valider</v-btn>
             </v-col>
             <v-btn class="redBtn" color="error" @click="reset">Annuler</v-btn>
-           
           </v-row>
         </form>
       </v-col>
@@ -151,7 +160,9 @@ export default {
     hex: "#FF00FF",
     file: "",
     dialog: null,
-    theme: "#283593"
+    theme: "#283593",
+    load:"http://localhost:5000/upload" + logo,
+    logo: ""
   }),
 
   computed: {
@@ -205,6 +216,15 @@ export default {
     regret() {
       this.setColor("#283593");
       this.theme = "#283593";
+    },
+
+    async reset() {
+      let name = "245f63a3f77dad2daf41dbdac29f9716.jpeg";
+      let reponse = await getData.getLogo(name).then(reponse =>{
+       if(reponse.data){
+        this.logo = reponse.data;
+       };
+      });
     }
   }
 };
@@ -217,8 +237,8 @@ export default {
       background-color: #fff;
     }
 
-    .redBtn{
-      margin-right: .7rem;
+    .redBtn {
+      margin-right: 0.7rem;
     }
   }
 }

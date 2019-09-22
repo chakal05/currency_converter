@@ -1,18 +1,17 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
-//const bodyParser = require("body-parser");
+
 //
+
 // Router
 
-const upload = require("./requests/upload");
+const upload = require("./routes/upload");
 
 // Middleware
 
-//app.use(bodyParser.urlencoded({ extended: true }));
-//app.use(bodyParser.json());
-app.use(cors());
-app.use("/requests/upload", upload);
+
+
+app.use("/upload", upload);
 
 
 
