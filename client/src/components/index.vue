@@ -1,38 +1,33 @@
 <template>
   <v-container fluid>
-    <div>
-      <v-app-bar elevation="0" dark>
-        <v-icon>fas fa-dollar-sign</v-icon>
-      </v-app-bar>
-    </div>
-
-    <v-col cols="12" class="title">
-      <v-toolbar-title class=" display-1 white--text font-weight-regular">
-        Convert scandinavian currencies</v-toolbar-title
-      >
-    </v-col>
     <v-row class="section" align="center" justify="center">
-      <v-card class="white--text" width="90%" height="500">
+      <v-card width="90%" height="500">
+        <v-card-title>
+          <v-icon color="white">fas fa-dollar-sign</v-icon>
+          <v-toolbar-title class=" display-1 white--text font-weight-regular">
+            Currency Converter</v-toolbar-title
+          >
+        </v-card-title>
         <v-card-text>
           <v-row>
-            <v-col class="amount " cols="12" sm="2">
+            <v-col class="amount " cols="12" sm="3">
               <v-text-field
                 dark
                 v-model="amount"
                 label="Amount"
                 :rules="currency"
                 clearable
-                @change="empty"
+                @click="empty()"
               ></v-text-field>
             </v-col>
 
-            <v-col class="base" cols="12" sm="2">
+            <v-col class="base " cols="12" sm="2">
               <v-select
                 dark
                 v-model="base"
-                :hint="`${base.state}, ${base.abbr}`"
+                :hint="`${base.money}, ${base.abbr}`"
                 :items="items"
-                item-text="state"
+                item-text="money"
                 item-value="abbr"
                 label="Select"
                 persistent-hint
@@ -46,17 +41,19 @@
 
             <v-col class="text-center arrows" cols="12" sm="2">
               <v-btn icon>
-                <v-icon color="white" large>fas fa-arrows-alt-h </v-icon></v-btn
+                <v-icon @click="inverse" color="white" large
+                  >fas fa-arrows-alt-h
+                </v-icon></v-btn
               >
             </v-col>
 
-            <v-col class="target" cols="12" sm="3">
+            <v-col class="target" cols="12" sm="2">
               <v-select
                 dark
                 v-model="target"
-                :hint="`${target.state}, ${target.abbr}`"
+                :hint="`${target.money}, ${target.abbr}`"
                 :items="items"
-                item-text="state"
+                item-text="money"
                 item-value="abbr"
                 label="Select"
                 persistent-hint
@@ -74,8 +71,12 @@
           </v-row>
         </v-card-text>
 
-        <div v-if="curr" class="result">
-          <v-col class="text-center" cols="12">
+        <div v-if="!err" class="result">
+          <div v-if="enter" class="text-center ma-5  white--text">
+            <h1>Enter amount</h1>
+          </div>
+
+          <v-col v-if="curr" class="text-center  white--text" cols="12">
             <h1>
               {{ result }} <span>{{ target.abbr }}</span>
             </h1>
@@ -84,9 +85,9 @@
           </v-col>
         </div>
 
-        <div v-if="err" class="error">
-          <v-col class="text-center " cols="12">
-            <p color="white">{{ error }}</p>
+        <div v-if="err" class="erreur">
+          <v-col class="text-center red--text" cols="12">
+            <h3>{{ error }}</h3>
           </v-col>
         </div>
       </v-card>
@@ -99,21 +100,20 @@
     name: 'index',
     data() {
       return {
-        base: { state: 'Dollars', abbr: 'USD' },
-        target: { state: 'Swdish Krone', abbr: 'SEK' },
+        base: { money: 'Dollars', abbr: 'USD' },
+        target: { money: 'Swedish Krone', abbr: 'SEK' },
         items: [
-          { state: 'Dollars', abbr: 'USD' },
-          { state: 'Danish Krone', abbr: 'DKK' },
-          { state: 'Euro', abbr: 'EUR' },
-          { state: 'Swedish Krone', abbr: 'SEK' },
-          { state: 'Norwegian Krone', abbr: 'NOK' },
+          { money: 'Dollars', abbr: 'USD' },
+          { money: 'Danish Krone', abbr: 'DKK' },
+          { money: 'Euro', abbr: 'EUR' },
+          { money: 'Swedish Krone', abbr: 'SEK' },
+          { money: 'Norwegian Krone', abbr: 'NOK' },
         ],
         result: null,
-        usd: 1,
-        amount: 1,
         curr: false,
         err: false,
         error: null,
+        enter: true,
         date: null,
         time: null,
         currency: [v => !isNaN(v) || 'Currency input expects a number'],
@@ -121,23 +121,32 @@
     },
     methods: {
       async convert() {
-        let res;
         if (this.base.abbr === this.target.abbr) {
-          this.error = `Base and target currency are the same`;
+          this.error = `Base and target currency must not be the same`;
           this.err = true;
           this.curr = false;
           return;
         }
 
-        if (!isNaN(this.amount)) {
+        if (this.amount && !isNaN(this.amount)) {
+          let res;
           await axios
             .get('https://api.exchangerate-api.com/v4/latest/USD')
             .then(response => {
+              this.curr = true;
+              this.enter = false;
+
+              // Retrieve date
               this.date = response.data.date;
+
+              // Format time
               let h = new Date().getHours(response.data.time_last_updated);
+              let hour = h < 10 ? '0' + h : h;
               let m = new Date().getMinutes(response.data.time_last_updated);
+              let minute = m < 10 ? '0' + m : m;
               let s = new Date().getSeconds(response.data.time_last_updated);
-              this.time = `${h}:${m}:${s}`;
+              let second = s < 10 ? '0' + s : s;
+              this.time = `${hour}:${minute}:${second}`;
 
               // Base curency = USD
 
@@ -151,10 +160,12 @@
                 } else if (this.target.abbr === 'NOK') {
                   res = this.amount * response.data.rates.NOK;
                 }
-                this.curr = true;
+
+                return (this.result = res.toFixed(4));
               }
 
               // Base curency = SEK
+
               if (this.base.abbr === 'SEK') {
                 let base = this.amount / response.data.rates.SEK;
                 if (this.target.abbr === 'USD') {
@@ -166,7 +177,8 @@
                 } else if (this.target.abbr === 'NOK') {
                   res = base * response.data.rates.NOK;
                 }
-                this.curr = true;
+
+                return (this.result = res.toFixed(4));
               }
 
               // Base curency = DKK
@@ -181,7 +193,8 @@
                 } else if (this.target.abbr === 'NOK') {
                   res = base * response.data.rates.NOK;
                 }
-                this.curr = true;
+
+                return (this.result = res.toFixed(4));
               }
 
               // Base curency = EUR
@@ -196,7 +209,8 @@
                 } else if (this.target.abbr === 'NOK') {
                   res = base * response.data.rates.NOK;
                 }
-                this.curr = true;
+
+                return (this.result = res.toFixed(4));
               }
 
               // Base curency = NOK
@@ -211,10 +225,9 @@
                 } else if (this.target.abbr === 'SEK') {
                   res = base * response.data.rates.SEK;
                 }
-                this.curr = true;
-              }
 
-              return (this.result = res.toFixed(4));
+                return (this.result = res.toFixed(4));
+              }
             })
             .catch(err => {
               this.error = err;
@@ -231,11 +244,21 @@
       empty() {
         this.result = null;
         this.curr = false;
+        this.enter = true;
         this.err = false;
         this.error = null;
+        this.amount = null;
       },
 
-      inverse() {},
+      inverse() {
+        let a = this.base;
+        let b = this.target;
+
+        this.target = a;
+        this.base = b;
+
+        this.empty();
+      },
     },
   };
 </script>
@@ -251,96 +274,67 @@
   .container {
     width: 800px;
     height: 100%;
-    .v-app-bar {
-      padding: 1rem;
-      background: none !important;
 
-      .v-icon {
-        font-size: 5rem;
-      }
-    }
-
-    .title {
-      margin-top: 3rem;
-      margin-bottom: 3rem;
-      padding-left: 2rem;
-
-      .display-1 {
-        @media screen and (max-width: 1001px) {
-          font-size: 1.7rem !important;
-          font-weight: bold !important;
-        }
-        @include phone {
-          font-size: 1.1rem !important;
-          font-weight: bold !important;
-        }
-      }
-    }
     .row {
       .v-card {
         background-color: #201c18;
-        //   margin-top: 7rem;
+        margin-top: 10rem;
 
         @include phone {
           width: 90% !important;
-          height: 650px !important;
+          height: 750px !important;
+          margin-top: 5rem;
         }
 
-        .col {
-          margin-bottom: 5rem;
+        .v-card__title {
+          margin-bottom: 2rem;
+          .v-icon {
+            font-size: 2rem;
+            margin-right: 5px;
+          }
+
           @include phone {
-            margin-bottom: 1rem;
+            margin-bottom: 0;
+          }
+
+          .display-1 {
+            @include phone {
+              font-size: 1.5rem !important;
+            }
           }
         }
 
         .v-card__text {
           height: 100px;
           padding: 1rem;
-          .amount {
-            padding-top: 0.7rem;
-            .v-text-field {
-              height: 56px;
-            }
+          margin-bottom: 7rem;
+          @include phone {
+            margin-bottom: 1rem;
           }
-          .base {
-            .v-select {
-              height: 56px;
-            }
-          }
-
           .arrows {
             padding-top: 1.5rem;
-          }
-
-          .target {
-            .v-select {
-            }
           }
         }
 
         .result {
-          margin-top: 5rem;
-          margin-bottom: 5rem;
+          border: 1px solid white;
+          border-radius: 7px;
+          width: 90%;
+          margin: 0 auto;
 
           @include phone {
-            margin-bottom: 0;
-            margin-top: 0;
             position: absolute;
-            bottom: 0;
-            left: 20%;
-            right: 20%;
+            bottom: 2rem;
           }
         }
 
-        .error {
-          margin-top: 5rem;
-
+        .erreur {
+          margin-top: 7rem;
+          width: 90%;
+          margin: 0 auto;
           @include phone {
-            margin-top: 0;
             position: absolute;
-            bottom: 1rem;
-            left: 20%;
-            right: 20%;
+            bottom: 2rem;
           }
         }
       }
