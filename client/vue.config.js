@@ -2,9 +2,6 @@ module.exports = {
   "transpileDependencies": [
     "vuetify"
   ],
-  devServer: {
-    proxy: "http://localhost:4000"
-  },
   runtimeCompiler: true,
   chainWebpack: config => {
     config.module
