@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row class="section" align="center" justify="center">
-      <v-card width="90%" height="500">
+      <v-card elevation='0' width="90%" height="500">
         <v-card-title>
           <v-icon color="white">fas fa-dollar-sign</v-icon>
           <v-toolbar-title class=" display-1 white--text font-weight-regular">
@@ -277,17 +277,17 @@
 
     .row {
       .v-card {
-        background-color: #201c18;
-        margin-top: 10rem;
+       background:none;
+        margin-top: 7rem;
 
         @include phone {
           width: 90% !important;
           height: 750px !important;
-          margin-top: 5rem;
+          margin-top: 0;
         }
 
         .v-card__title {
-          margin-bottom: 2rem;
+          margin-bottom: 5rem;
           .v-icon {
             font-size: 2rem;
             margin-right: 5px;
@@ -307,7 +307,7 @@
         .v-card__text {
           height: 100px;
           padding: 1rem;
-          margin-bottom: 7rem;
+          margin-bottom: 11rem;
           @include phone {
             margin-bottom: 1rem;
           }
@@ -317,14 +317,13 @@
         }
 
         .result {
-          border: 1px solid white;
-          border-radius: 7px;
           width: 90%;
           margin: 0 auto;
 
           @include phone {
             position: absolute;
             bottom: 2rem;
+            left: 1rem;
           }
         }
 
@@ -334,7 +333,8 @@
           margin: 0 auto;
           @include phone {
             position: absolute;
-            bottom: 2rem;
+            bottom: 5rem;
+            left: 1rem;
           }
         }
       }
