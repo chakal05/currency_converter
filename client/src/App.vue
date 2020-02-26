@@ -36,5 +36,9 @@ import index from '../src/components/index';
         #8e0e00
       ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
+
+    @media screen and (max-width: 600px){
+      
+    }
   }
 </style>

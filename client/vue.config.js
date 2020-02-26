@@ -1,5 +1,8 @@
 const path = require('path');
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+  ? '/scanCurr/'
+  : '/',
   "transpileDependencies": [
     "vuetify"
   ],
@@ -14,6 +17,6 @@ module.exports = {
         return options;
       });
   },
-   outputDir: path.resolve(__dirname, "../public"),
+  // outputDir: path.resolve(__dirname, "../public"),
   
 }
