@@ -88,21 +88,21 @@
 							</v-row>
 						</v-card-text>
 
-						<div v-if="!err" class="result">
+						<div v-if="!errorTrue" class="result">
 							<div
-								v-if="enter"
+								v-if="defaultText"
 								class="text-center ma-5  white--text"
 							>
 								<h1>Enter amount</h1>
 							</div>
 
 							<v-col
-								v-if="curr"
+								v-if="resultTrue"
 								class="text-center  white--text"
 								cols="12"
 							>
 								<h1>
-									{{ result }}
+									{{ showResult }}
 									<span>{{ target.abbr }}</span>
 								</h1>
 
@@ -110,9 +110,9 @@
 							</v-col>
 						</div>
 
-						<div v-if="err" class="erreur">
+						<div v-if="errorTrue" class="erreur">
 							<v-col class="text-center red--text" cols="12">
-								<h3>{{ error }}</h3>
+								<h3>{{ errorMessage }}</h3>
 							</v-col>
 						</div>
 					</v-card>
@@ -152,12 +152,13 @@
 						abbr: 'NOK',
 					},
 				],
-				result: null,
-				curr: false,
-				err: false,
+				ratesData: null,
+				showResult: null,
+				resultTrue: false,
+				errorTrue: false,
 				amount: null,
-				error: null,
-				enter: true,
+				errorMessage: null,
+				defaultText: true,
 				date: null,
 				time: null,
 				currency: [
@@ -165,140 +166,169 @@
 				],
 			};
 		},
+
+		async created() {
+			await axios
+				.get('https://api.exchangerate-api.com/v4/latest/USD')
+				.then((response) => {
+					this.ratesData = response.data;
+				});
+		},
 		methods: {
 			async convert() {
 				if (this.base.abbr === this.target.abbr) {
-					this.error = `Base and target currency must not be the same`;
-					this.err = true;
-					this.curr = false;
+					this.errorMessage = `Base and target currency must not be the same`;
+					this.errorTrue = true;
+					this.resultTrue = false;
 					return;
 				}
 
 				if (this.amount && !isNaN(this.amount)) {
-					let res;
-					await axios
-						.get(
-							'https://api.exchangerate-api.com/v4/latest/USD'
-						)
-						.then((response) => {
-							this.curr = true;
-							this.enter = false;
+					this.resultTrue = true;
+					this.defaultText = false;
 
-							// Retrieve date
-							this.date = response.data.date;
+					// Retrieve date
+					this.date = this.ratesData.date;
 
-							// Get time
+					// Get time
 
-							this.time = new Date()
-								.toTimeString(response.data.time_last_updated)
-								.substr(0, 8);
+					this.time = new Date()
+						.toTimeString(this.ratesData.time_last_updated)
+						.substr(0, 8);
 
-							// Base curency => USD
+					// Base curency => USD
 
-							if (this.base.abbr === 'USD') {
-								if (this.target.abbr === 'SEK') {
-									res =
-										this.amount * response.data.rates.SEK;
-								} else if (this.target.abbr === 'DKK') {
-									res =
-										this.amount * response.data.rates.DKK;
-								} else if (this.target.abbr === 'EUR') {
-									res =
-										this.amount * response.data.rates.EUR;
-								} else if (this.target.abbr === 'NOK') {
-									res =
-										this.amount * response.data.rates.NOK;
-								}
+					if (this.base.abbr === 'USD') {
+						switch (this.target.abbr) {
+							case 'SEK':
+								return (this.showResult = (
+									this.amount * this.ratesData.rates.SEK
+								).toFixed(4));
+							case 'DKK':
+								return (this.showResult = (
+									this.amount * this.ratesData.rates.DKK
+								).toFixed(4));
+							case 'EUR':
+								return (this.showResult = (
+									this.amount * this.ratesData.rates.EUR
+								).toFixed(4));
+							case 'NOK':
+								return (this.showResult = (
+									this.amount * this.ratesData.rates.NOK
+								).toFixed(4));
+							default:
+								break;
+						}
+					}
 
-								return (this.result = res.toFixed(4));
-							}
+					// Base curency = SEK
 
-							// Base curency = SEK
+					if (this.base.abbr === 'SEK') {
+						let base = this.amount / this.ratesData.rates.SEK;
 
-							if (this.base.abbr === 'SEK') {
-								let base =
-									this.amount / response.data.rates.SEK;
-								if (this.target.abbr === 'USD') {
-									res = base;
-								} else if (this.target.abbr === 'DKK') {
-									res = base * response.data.rates.DKK;
-								} else if (this.target.abbr === 'EUR') {
-									res = base * response.data.rates.EUR;
-								} else if (this.target.abbr === 'NOK') {
-									res = base * response.data.rates.NOK;
-								}
+						switch (this.target.abbr) {
+							case 'USD':
+								return (this.showResult = base.toFixed(4));
+							case 'DKK':
+								return (this.showResult = (
+									base * this.ratesData.rates.DKK
+								).toFixed(4));
+							case 'EUR':
+								return (this.showResult = (
+									base * this.ratesData.rates.EUR
+								).toFixed(4));
+							case 'NOK':
+								return (this.showResult = (
+									base * this.ratesData.rates.NOK
+								).toFixed(4));
+							default:
+								break;
+						}
+					}
 
-								return (this.result = res.toFixed(4));
-							}
+					// Base curency = DKK
+					if (this.base.abbr === 'DKK') {
+						let base = this.amount / this.ratesData.rates.DKK;
 
-							// Base curency = DKK
-							if (this.base.abbr === 'DKK') {
-								let base =
-									this.amount / response.data.rates.DKK;
-								if (this.target.abbr === 'USD') {
-									res = base;
-								} else if (this.target.abbr === 'SEK') {
-									res = base * response.data.rates.SEK;
-								} else if (this.target.abbr === 'EUR') {
-									res = base * response.data.rates.EUR;
-								} else if (this.target.abbr === 'NOK') {
-									res = base * response.data.rates.NOK;
-								}
+						switch (this.target.abbr) {
+							case 'USD':
+								return (this.showResult = base.toFixed(4));
+							case 'SEK':
+								return (this.showResult = (
+									base * this.ratesData.rates.SEK
+								).toFixed(4));
+							case 'EUR':
+								return (this.showResult = (
+									base * this.ratesData.rates.EUR
+								).toFixed(4));
+							case 'NOK':
+								return (this.showResult = (
+									base * this.ratesData.rates.NOK
+								).toFixed(4));
+							default:
+								break;
+						}
+					}
 
-								return (this.result = res.toFixed(4));
-							}
+					// Base curency = EUR
+					if (this.base.abbr === 'EUR') {
+						let base = this.amount / this.ratesData.rates.EUR;
 
-							// Base curency = EUR
-							if (this.base.abbr === 'EUR') {
-								let base =
-									this.amount / response.data.rates.EUR;
-								if (this.target.abbr === 'USD') {
-									res = base;
-								} else if (this.target.abbr === 'DKK') {
-									res = base * response.data.rates.DKK;
-								} else if (this.target.abbr === 'SEK') {
-									res = base * response.data.rates.SEK;
-								} else if (this.target.abbr === 'NOK') {
-									res = base * response.data.rates.NOK;
-								}
+						switch (this.target.abbr) {
+							case 'USD':
+								return (this.showResult = base.toFixed(4));
+							case 'DKK':
+								return (this.showResult = (
+									base * this.ratesData.rates.DKK
+								).toFixed(4));
+							case 'SEK':
+								return (this.showResult = (
+									base * this.ratesData.rates.SEK
+								).toFixed(4));
+							case 'NOK':
+								return (this.showResult = (
+									base * this.ratesData.rates.NOK
+								).toFixed(4));
+							default:
+								break;
+						}
+					}
 
-								return (this.result = res.toFixed(4));
-							}
+					// Base curency = NOK
+					if (this.base.abbr === 'NOK') {
+						let base = this.amount / this.ratesData.rates.NOK;
 
-							// Base curency = NOK
-							if (this.base.abbr === 'NOK') {
-								let base =
-									this.amount / response.data.rates.NOK;
-								if (this.target.abbr === 'USD') {
-									res = base;
-								} else if (this.target.abbr === 'DKK') {
-									res = base * response.data.rates.DKK;
-								} else if (this.target.abbr === 'EUR') {
-									res = base * response.data.rates.EUR;
-								} else if (this.target.abbr === 'SEK') {
-									res = base * response.data.rates.SEK;
-								}
-
-								return (this.result = res.toFixed(4));
-							}
-						})
-						.catch((err) => {
-							this.error = err;
-							this.err = true;
-							this.curr = false;
-						});
+						switch (this.target.abbr) {
+							case 'USD':
+								return (this.showResult = base.toFixed(4));
+							case 'SEK':
+								return (this.showResult = (
+									base * this.ratesData.rates.SEK
+								).toFixed(4));
+							case 'EUR':
+								return (this.showResult = (
+									base * this.ratesData.rates.EUR
+								).toFixed(4));
+							case 'DKK':
+								return (this.showResult = (
+									base * this.ratesData.rates.DKK
+								).toFixed(4));
+							default:
+								break;
+						}
+					}
 				} else {
-					this.error = 'Please, enter a number';
-					this.err = true;
-					this.curr = false;
+					this.errorMessage = 'Please, enter an amount';
+					this.errorTrue = true;
+					this.resultTrue = false;
 				}
 			},
 
 			empty() {
-				this.result = null;
-				this.curr = false;
-				this.enter = true;
-				this.err = false;
+				this.showResult = null;
+				this.resultTrue = false;
+				this.defaultText = true;
+				this.errorTrue = false;
 				this.error = null;
 				this.amount = null;
 			},
@@ -324,7 +354,7 @@
 	}
 
 	@mixin phone {
-		@media screen and (max-width: 500px) {
+		@media screen and (max-width: 600px) {
 			@content;
 		}
 	}
@@ -348,13 +378,14 @@
 						margin-top: 5rem;
 
 						@include ipad {
-							margin-top: 1rem;
+							//	margin-top: 7rem;
 						}
 
 						@include phone {
 							width: 90% !important;
-							//	height: 750px !important;
-							margin-top: 0;
+							padding-top: 0;
+							height: auto;
+							margin-top: 1rem;
 						}
 
 						.v-card__title {
@@ -400,19 +431,14 @@
 
 							@include phone {
 								margin-bottom: 3rem;
-								margin-top: 3rem;
+								margin-top: 5rem;
 							}
 						}
 
 						.erreur {
-							margin-top: 7rem;
 							width: 90%;
 							margin: 0 auto;
-							@include phone {
-								position: absolute;
-								bottom: 5rem;
-								left: 1rem;
-							}
+							margin-bottom: 3rem;
 						}
 					}
 				}
