@@ -175,7 +175,7 @@
 				});
 		},
 		methods: {
-			async convert() {
+			convert() {
 				if (this.base.abbr === this.target.abbr) {
 					this.errorMessage = `Base and target currency must not be the same`;
 					this.errorTrue = true;
