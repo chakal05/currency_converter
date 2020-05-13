@@ -18,6 +18,6 @@ module.exports = {
       });
   },
 
-   outputDir: path.resolve(__dirname, "./build"),
+   outputDir: path.resolve(__dirname, "../build"),
   
 }
