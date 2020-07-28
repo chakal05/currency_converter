@@ -1,11 +1,6 @@
 const path = require('path');
 module.exports = {
- // publicPath: process.env.NODE_ENV === 'production'
- // ? '/scanCurr/'
- // : '/',
- // "transpileDependencies": [
- //   "vuetify"
- // ],
+
   runtimeCompiler: true,
   chainWebpack: config => {
     config.module
