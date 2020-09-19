@@ -87,14 +87,14 @@ function App() {
 	}, []);
 
 	const convert = () => {
-		if (amount === '' || typeof amount === 'string' ) {
+		if (amount === ''  ) {
 			setErrorMessage('Please, enter amount');
 			return;
 		}
 
 		if (from === to) {
 			setErrorMessage(
-				`Base and target currency must not be the same`
+				`Base and target currency must not be empty nor the same`
 			);
 			return;
 		}
