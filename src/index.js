@@ -87,7 +87,7 @@ function App() {
 	}, []);
 
 	const convert = () => {
-		if (amount === '') {
+		if (amount === '' || typeof amount === 'string' ) {
 			setErrorMessage('Please, enter amount');
 			return;
 		}
