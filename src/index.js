@@ -1,98 +1,102 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
+import {
+	TextField,
+	Container,
+	InputAdornment,
+} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-const useStyles = makeStyles((theme) => ({
-	appBar: {
-		position: 'relative',
-	},
-	layout: {
-		width: 'auto',
-		marginLeft: theme.spacing(2),
-		marginRight: theme.spacing(2),
-		[theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-			width: 600,
-			marginLeft: 'auto',
-			marginRight: 'auto',
-		},
-	},
-	paper: {
-		marginTop: theme.spacing(6),
-		marginBottom: theme.spacing(3),
-		minHeight: 500,
-		padding: theme.spacing(2),
-		[theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-			marginTop: theme.spacing(6),
-			marginBottom: theme.spacing(6),
-			padding: theme.spacing(3),
-		},
-	},
-	papier: {
-		padding: theme.spacing(3),
-		textAlign: 'center',
-		color: theme.palette.text.secondary,
-		marginTop: theme.spacing(5),
-		marginBottom: theme.spacing(3),
-		width: '85%',
-		margin: ' auto',
-	},
-	formControl: {
-		margin: theme.spacing(1),
-		minWidth: 120,
-	},
-	pos: {
-		marginTop: 10,
-	},
-	red: {
-		color: 'red',
-	},
-}));
+import './index.scss';
+import logo from './assets/scancurrLogo.png';
 
 function App() {
-	const classes = useStyles();
 	const [amount, setAmount] = useState('');
-	const [from, setFrom] = useState('');
-	const [to, setTo] = useState('');
-	const [ratesData, setData] = useState('');
+	const [from, setFrom] = useState('USD');
+	const [to, setTo] = useState('SEK');
+	const [ratesData, setData] = useState([]);
 	const [result, setResult] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
 	const [date, setDate] = useState('');
 	const [time, setTime] = useState('');
-	const [curr, setCurr] = useState('');
+	const [swedish, danish, euros, norsk] = ratesData;
 	const getData = async () => {
 		await axios
 			.get('https://api.exchangerate-api.com/v4/latest/USD')
 			.then((response) => {
-				setData(response.data);
+				setDate(response.data.date);
+				setTime(
+					new Date()
+						.toTimeString(response.data.time_last_updated)
+						.substr(0, 8)
+				);
+				setData([
+					response.data.rates.SEK,
+					response.data.rates.DKK,
+					response.data.rates.EUR,
+					response.data.rates.NOK,
+				]);
+			})
+			.catch((err) => {
+				throw err;
 			});
 	};
-	useEffect(() => {
-		getData();
-	}, []);
+		useEffect(() => {
+			getData();
+		}, []);
+	
+	const inverse = () => {
+		let a = from;
+		let b = to;
+		setFrom(b);
+		setTo(a);
+	};
 
+	const currencies = [
+		{
+			label: 'US Dollar',
+			value: 'USD',
+			rate: 1,
+		},
+		{
+			label: 'Euro',
+			value: 'EUR',
+			rate: euros,
+		},
+		{
+			label: 'Swedish Krone',
+			value: 'SEK',
+			rate: swedish,
+		},
+		{
+			label: 'Danish Krone',
+			value: 'DKK',
+			rate: danish,
+		},
+		{
+			label: 'Norwegian Krone',
+			value: 'NOK',
+			rate: norsk,
+		},
+	];
 	const convert = () => {
-		if (amount === ''  ) {
-			setErrorMessage('Please, enter amount');
+		getData();
+
+		if (amount === '' || isNaN(amount)) {
+			setErrorMessage(
+				'Please, enter a numeric value for the amount'
+			);
 			return;
 		}
 
-		if (from === to) {
+		if (from === to || to === from) {
 			setErrorMessage(
 				`Base and target currency must not be empty nor the same`
 			);
@@ -100,38 +104,22 @@ function App() {
 		}
 
 		if (amount && !isNaN(amount)) {
-			setCurr(to);
-			// Retrieve date
-			setDate(ratesData.date);
-
-			// Get time
-
-			setTime(
-				new Date()
-					.toTimeString(ratesData.time_last_updated)
-					.substr(0, 8)
-			);
+            
+			// Set errorMessage to null
+			setErrorMessage('');
 
 			// Base curency => USD
 
 			if (from === 'USD') {
 				switch (to) {
 					case 'SEK':
-						return setResult(
-							(amount * ratesData.rates.SEK).toFixed(4)
-						);
+						return setResult((amount * swedish).toFixed(4));
 					case 'DKK':
-						return setResult(
-							(amount * ratesData.rates.DKK).toFixed(4)
-						);
+						return setResult((amount * danish).toFixed(4));
 					case 'EUR':
-						return setResult(
-							(amount * ratesData.rates.EUR).toFixed(4)
-						);
+						return setResult((amount * euros).toFixed(4));
 					case 'NOK':
-						return setResult(
-							(amount * ratesData.rates.NOK).toFixed(4)
-						);
+						return setResult((amount * norsk).toFixed(4));
 					default:
 						break;
 				}
@@ -140,23 +128,17 @@ function App() {
 			// Base curency = SEK
 
 			if (from === 'SEK') {
-				let base = amount / ratesData.rates.SEK;
+				let base = amount / swedish;
 
 				switch (to) {
 					case 'USD':
 						return setResult(base.toFixed(4));
 					case 'DKK':
-						return setResult(
-							(base * ratesData.rates.DKK).toFixed(4)
-						);
+						return setResult((base * danish).toFixed(4));
 					case 'EUR':
-						return setResult(
-							(base * ratesData.rates.EUR).toFixed(4)
-						);
+						return setResult((base * euros).toFixed(4));
 					case 'NOK':
-						return setResult(
-							(base * ratesData.rates.NOK).toFixed(4)
-						);
+						return setResult((base * norsk).toFixed(4));
 					default:
 						break;
 				}
@@ -164,23 +146,17 @@ function App() {
 
 			// Base curency = DKK
 			if (from === 'DKK') {
-				let base = amount / ratesData.rates.DKK;
+				let base = amount / danish;
 
 				switch (to) {
 					case 'USD':
 						return setResult(base.toFixed(4));
 					case 'SEK':
-						return setResult(
-							(base * ratesData.rates.SEK).toFixed(4)
-						);
+						return setResult((base * swedish).toFixed(4));
 					case 'EUR':
-						return setResult(
-							(base * ratesData.rates.EUR).toFixed(4)
-						);
+						return setResult((base * euros).toFixed(4));
 					case 'NOK':
-						return setResult(
-							(base * ratesData.rates.NOK).toFixed(4)
-						);
+						return setResult((base * norsk).toFixed(4));
 					default:
 						break;
 				}
@@ -188,23 +164,17 @@ function App() {
 
 			// Base curency = EUR
 			if (from === 'EUR') {
-				let base = amount / ratesData.rates.EUR;
+				let base = amount / euros;
 
 				switch (to) {
 					case 'USD':
 						return setResult(base.toFixed(4));
 					case 'DKK':
-						return setResult(
-							(base * ratesData.rates.DKK).toFixed(4)
-						);
+						return setResult((base * danish).toFixed(4));
 					case 'SEK':
-						return setResult(
-							(base * ratesData.rates.SEK).toFixed(4)
-						);
+						return setResult((base * swedish).toFixed(4));
 					case 'NOK':
-						return setResult(
-							(base * ratesData.rates.NOK).toFixed(4)
-						);
+						return setResult((base * norsk).toFixed(4));
 					default:
 						break;
 				}
@@ -212,211 +182,181 @@ function App() {
 
 			// Base curency = NOK
 			if (from === 'NOK') {
-				let base = amount / ratesData.rates.NOK;
+				let base = amount / norsk;
 
 				switch (to) {
 					case 'USD':
 						return setResult(base.toFixed(4));
 					case 'SEK':
-						return setResult(
-							(base * ratesData.rates.SEK).toFixed(4)
-						);
+						return setResult((base * swedish).toFixed(4));
 					case 'EUR':
-						return setResult(
-							(base * ratesData.rates.EUR).toFixed(4)
-						);
+						return setResult((base * euros).toFixed(4));
 					case 'DKK':
-						return setResult(
-							(base * ratesData.rates.DKK).toFixed(4)
-						);
+						return setResult((base * danish).toFixed(4));
 					default:
 						break;
 				}
 			}
 		}
 	};
+
 	return (
-		<React.Fragment>
+		<div className='root'>
 			<CssBaseline />
-			<AppBar
-				position='absolute'
-				color='default'
-				className={classes.appBar}>
-				<Toolbar>
-					<Typography variant='h6' color='inherit' noWrap>
-						ScanCurr
-					</Typography>
-				</Toolbar>
-			</AppBar>
-			<main className={classes.layout}>
-				<Paper className={classes.paper} elevation={5}>
-					<Typography
-						component='h1'
-						variant='h4'
-						align='center'
-						style={{ paddingTop: '1rem' }}>
-						Currency converter
-					</Typography>
-					<Grid container spacing={3}>
-						<Paper className={classes.papier}>
-							<Grid item xs={12}>
-								<TextField
-									id='outlined-basic'
-									label='Amount'
-									variant='outlined'
-									onChange={(e) => {
-										let val = e.target.value;
-										if (parseInt(val)) setAmount(val);
-									}}
+
+			<Container>
+				<main className='layout'>
+					<Paper className='paper' elevation={5}>
+						<Grid
+							className='box'
+							container
+							style={{ marginBottom: '2rem' }}>
+							<Grid item xs={12} className='logoContainer'>
+								<img
+									src={logo}
+									className='logo'
+									alt='siteLogo'
 								/>
 							</Grid>
-							<Grid container style={{ marginTop: '3rem' }}>
-								<Grid item xs={5}>
-									<FormControl
-										className={classes.formControl}>
-										<InputLabel id='demo-simple-select-label'>
-											From
-										</InputLabel>
-										<Select
-											labelId='demo-simple-select-label'
-											id='demo-simple-select'
-											value={from}
-											onChange={(e) =>
-												setFrom(e.target.value)
-											}>
-											<MenuItem value={'USD'}>
-												US Dollar
-											</MenuItem>
-											<MenuItem value={'EUR'}>
-												Euro
-											</MenuItem>
-											<MenuItem value={'SEK'}>
-												Swedish Krone
-											</MenuItem>
-											<MenuItem value={'DKK'}>
-												Danish Krone
-											</MenuItem>
-											<MenuItem value={'NOK'}>
-												Norwegian Krone
-											</MenuItem>
-										</Select>
-									</FormControl>
-								</Grid>
 
-								<Grid item xs={2}>
+							<div className='fullGrid'>
+								<TextField
+									id='standard-select-currency'
+									select
+									value={from}
+									variant='standard'
+									label='From'
+									className='field choose'
+									onChange={(e) => {
+										setResult('');
+										return setFrom(e.target.value);
+									}}>
+									{currencies.map((option) => (
+										<MenuItem
+											key={option.value}
+											value={option.value}>
+											{option.label}
+										</MenuItem>
+									))}
+								</TextField>
+								<div className='amount'>
+									<TextField
+										onChange={(e) => {
+											setAmount(e.target.value);
+											setResult('');
+										}}
+										placeholder='Enter amount'
+										InputProps={{
+											endAdornment: (
+												<InputAdornment position='end'>
+													<p className='curr'>
+														{amount && from}
+													</p>
+												</InputAdornment>
+											),
+										}}
+									/>
+								</div>
+							</div>
+
+							<div className='inverse'>
+								<Button>
 									<FontAwesomeIcon
 										style={{
 											fontSize: '1.5rem',
-											marginTop: '1.7rem',
+											marginTop: '1rem',
 										}}
-										icon={faArrowRight}
+										icon={faArrowsAltH}
+										onClick={inverse}
 									/>
-								</Grid>
+								</Button>
+							</div>
 
-								<Grid item xs={5}>
-									<FormControl
-										className={classes.formControl}>
-										<InputLabel id='demo-simple-select-label'>
-											To
-										</InputLabel>
-										<Select
-											labelId='demo-simple-select-label'
-											id='demo-simple-select'
-											value={to}
-											onChange={(e) => {
-												setTo(e.target.value);
-											}}>
-											<MenuItem value={'USD'}>
-												US Dollar
-											</MenuItem>
-											<MenuItem value={'EUR'}>
-												Euro
-											</MenuItem>
-											<MenuItem value={'SEK'}>
-												Swedish Krone
-											</MenuItem>
-											<MenuItem value={'DKK'}>
-												Danish Krone
-											</MenuItem>
-											<MenuItem value={'NOK'}>
-												Norwegian Krone
-											</MenuItem>
-										</Select>
-									</FormControl>
-								</Grid>
-								<Grid item xs={12} style={{ margin: '3rem' }}>
-									<Button
-										variant='contained'
-										onClick={() => {
-											convert();
-										}}>
-										{' '}
-										Convert{' '}
-									</Button>
-								</Grid>
-								<Grid item xs={12} align='center'>
-									{errorMessage !== undefined &&
-										result === '' && (
-											<p className={classes.red}>
-												{' '}
-												{errorMessage}{' '}
-											</p> // red color here
-										)}
-								</Grid>
-							</Grid>
-						</Paper>
-					</Grid>
-				</Paper>
-				<Paper elevation={5}>
-					<Card
-						className={classes.root}
-						align='center'
-						variant='outlined'>
-						{result === '' && (
-							<Typography
-								component='h1'
-								variant='h4'
+							<div className='fullGrid'>
+								<TextField
+									id='standard-select-currency'
+									select
+									className='field choose'
+									variant='standard'
+									label='To'
+									value={to}
+									onChange={(e) => {
+										setResult('');
+										return setTo(e.target.value);
+									}}>
+									{currencies.map((option) => (
+										<MenuItem
+											key={option.value}
+											value={option.value}>
+											{option.label}
+										</MenuItem>
+									))}
+								</TextField>
+
+								<div className='amount'>
+									<TextField
+										value={result}
+										placeholder={'Awaiting...'}
+										InputProps={{
+											endAdornment: (
+												<InputAdornment position='end'>
+													<p className='curr'>
+														{result && to}
+													</p>
+												</InputAdornment>
+											),
+										}}
+									/>
+								</div>
+							</div>
+							<Grid
 								align='center'
-								style={{ padding: '1rem' }}>
-								Start converting...
-							</Typography>
-						)}
+								style={{ marginTop: '5rem' }}
+								item
+								xs={12}>
+								<Button
+									size='large'
+									variant='contained'
+									onClick={convert}>
+									{' '}
+									Convert{' '}
+								</Button>
+							</Grid>
+						</Grid>
 
-						{result !== '' && (
-							<CardContent>
+						<div>
+							<Grid
+								item
+								xs={12}
+								align='center'
+								style={{
+									marginTop: '3rem',
+									marginBottom: '3rem',
+								}}>
+								{errorMessage !== '' && (
+									<h3 className='red'> {errorMessage} </h3>
+								)}
+								{result && (
+									<h3>
+										{' '}
+										Updated: {date} at {time}{' '}
+									</h3>
+								)}
 								<Typography
-									className={classes.title}
-									color='textSecondary'
-									gutterBottom>
-									Result
-								</Typography>
-								<Typography variant='h5' component='h2'>
-									{result} {curr}
-								</Typography>
-								<Typography
-									className={classes.pos}
-									color='textSecondary'>
-									Updated :
-								</Typography>
-								<Typography variant='body2' component='p'>
-									{date} at {time}
-								</Typography>
-							</CardContent>
-						)}
-					</Card>
-				</Paper>
-				<Typography
-					variant='body2'
-					color='textPrimary'
-					align='center'
-					style={{ marginTop: '3rem', marginBottom: '3rem' }}>
-					{'Copyright © '}
+									variant='body2'
+									color='textPrimary'
+									align='center'>
+									{'Copyright © '}
 
-					{new Date().getFullYear()}
-					{'.'}
-				</Typography>
-			</main>
-		</React.Fragment>
+									{new Date().getFullYear()}
+									{'.'}
+								</Typography>
+							</Grid>
+						</div>
+					</Paper>
+				</main>
+			</Container>
+		</div>
 	);
 }
 
