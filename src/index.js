@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import MenuItem from '@material-ui/core/MenuItem';
 import {
 	TextField,
 	Container,
-	InputAdornment,
+    InputAdornment,
+    CssBaseline,
+    Paper, Grid,
+    MenuItem,
+    Typography,
+    Button
 } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import { faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from '@material-ui/core/Button';
 import './index.scss';
 import logo from './assets/scancurrLogo.png';
 
