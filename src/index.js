@@ -4,12 +4,13 @@ import axios from 'axios';
 import {
 	TextField,
 	Container,
-    InputAdornment,
-    CssBaseline,
-    Paper, Grid,
-    MenuItem,
-    Typography,
-    Button
+	InputAdornment,
+	CssBaseline,
+	Paper,
+	Grid,
+	MenuItem,
+	Typography,
+	Button,
 } from '@material-ui/core';
 import { faArrowsAltH } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -47,16 +48,9 @@ function App() {
 				throw err;
 			});
 	};
-		useEffect(() => {
-			getData();
-		}, []);
-	
-	const inverse = () => {
-		let a = from;
-		let b = to;
-		setFrom(b);
-		setTo(a);
-	};
+	useEffect(() => {
+		getData();
+	}, []);
 
 	const currencies = [
 		{
@@ -103,7 +97,6 @@ function App() {
 		}
 
 		if (amount && !isNaN(amount)) {
-            
 			// Set errorMessage to null
 			setErrorMessage('');
 
@@ -259,14 +252,19 @@ function App() {
 							</div>
 
 							<div className='inverse'>
-								<Button>
+								<Button
+									onClick={() => {
+										let a = from;
+										let b = to;
+										setFrom(b);
+										setTo(a);
+									}}>
 									<FontAwesomeIcon
 										style={{
 											fontSize: '1.5rem',
 											marginTop: '1rem',
 										}}
 										icon={faArrowsAltH}
-										onClick={inverse}
 									/>
 								</Button>
 							</div>
