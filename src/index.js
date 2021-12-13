@@ -238,6 +238,7 @@ function App() {
 											setResult('');
 										}}
 										placeholder='Enter amount'
+                                        className='field'
 										InputProps={{
 											endAdornment: (
 												<InputAdornment position='end'>
@@ -293,6 +294,7 @@ function App() {
 								<div className='amount'>
 									<TextField
 										value={result}
+                                        className='field'
 										placeholder={'Awaiting...'}
 										InputProps={{
 											endAdornment: (
