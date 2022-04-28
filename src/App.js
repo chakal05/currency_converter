@@ -24,7 +24,6 @@ function App() {
 	const [result, setResult] = useState('');
 	const [data, setData] = useState({});
 	const [errorMessage, setErrorMessage] = useState('');
-	//const [time, setTime] = useState('');
 
 	const getData = async () => {
 		try {
@@ -34,7 +33,6 @@ function App() {
 			const response = await currencies.json();
 			const rates = response;
 			setData(rates);
-			//setTime(new Date().toTimeString().substring(0,8));
 		} catch (error) {}
 	};
 
@@ -165,7 +163,7 @@ function App() {
 											<span className=' ml-2 text-3xl'>{to.currencyName} </span>
 										</p>
 										<p className=' text-gray-500 font-bold text-lg mt-3'>
-											Updated today at time
+											Updated today at {new Date().toTimeString().substring(0, 8)}
 										</p>
 									</>
 								)}
