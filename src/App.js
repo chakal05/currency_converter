@@ -34,6 +34,7 @@ function App() {
 			const response = await currencies.json();
 			const rates = response;
 			setData(rates);
+			setTime(new Date().toTimeString().substring(0,8));
 		} catch (error) {}
 	};
 
@@ -41,10 +42,7 @@ function App() {
 		const theRates = data.rates;
 		const fromRate = theRates[from.currencycode];
 		const toRate = theRates[to.currencycode];
-		const event = new Date();
-		const getTime = event.toTimeString(data.time_last_updated);
-		const timeFormated = getTime.substring(0, 8);
-		setTime(timeFormated);
+
 		let exchange = (amount / fromRate) * toRate;
 		setResult(exchange.toFixed(2));
 	};
