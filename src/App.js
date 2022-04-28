@@ -42,8 +42,7 @@ function App() {
 		const toRate = theRates[to.currencycode];
 
 		let exchange = (amount / fromRate) * toRate;
-
-		setResult(exchange.toFixed(4));
+		setResult(exchange.toFixed(2));
 	};
 
 	useEffect(() => {
@@ -51,9 +50,9 @@ function App() {
 	}, []);
 
 	return (
-		<div className='App'>
-			<div className='bg-blue-900 h-96 '>
-				<div className='xl:container font-serif'>
+		<div className='App '>
+			<div className='bg-blue-900 h-96 sm:h-80'>
+				<div className='xl:container  font-serif'>
 					<div className=' flex text-white p-2'>
 						<FontAwesomeIcon
 							icon={faCoins}
@@ -62,7 +61,7 @@ function App() {
 						<p className='font-black  text-2xl mx-1'> EXCHANGE </p>
 					</div>
 					{result && (
-						<div className=' p-3  md:p-5 md:w-9/12 my-7 w-11/12 mx-auto text-center text-white  '>
+						<div className=' p-1  md:p-5 md:w-9/12 my-7 w-11/12 mx-auto text-center text-white  '>
 							<p className=' text-lg md:text-2xl font-bold '>
 								{`${amount} ${from.currencycode} to ${to.currencycode} -- Converted
 						${from.currencyName}  to ${to.currencyName}`}
@@ -70,7 +69,7 @@ function App() {
 						</div>
 					)}
 					{!result && (
-						<div className='p-3 md:p-5 md:w-9/12 my-7 w-7/12 mx-auto text-center text-white'>
+						<div className='md:p-5 md:w-9/12 my-5 p-3 mx-auto text-center text-white'>
 							<p className='font-bold text-2xl'> Currency Converter </p>
 							<p> Live currency exchange rates</p>
 						</div>
@@ -84,8 +83,8 @@ function App() {
 									type='text'
 									value={amount}
 									onChange={(e) => {
+										setResult('');
 										let val = Number(e.target.value);
-
 										if (val === 0 || isNaN(val)) {
 											setErrorMessage('Please enter valid amount ');
 											setAmount(e.target.value);
@@ -151,17 +150,27 @@ function App() {
 							<div className='mt-12 '>
 								{result && (
 									<>
-										<p className='font-bold text-xl'>
+										<p className='font-bold text-2xl'>
 											{' '}
 											{amount}
-											<span className='text-gray-500 ml-2 text-lg'>
+											<span className='text-gray-500 ml-2 text-2xl'>
 												{from.currencyName}{' '}
 											</span>
 											=
 										</p>
 										<p className='font-bold text-3xl'>
 											{result}
-											<span className=' ml-2 text-2xl'>{to.currencyName} </span>
+											<span className=' ml-2 text-3xl'>{to.currencyName} </span>
+										</p>
+										<p className=' text-gray-500 text-lg mt-3'>
+											{' '}
+											Updated:{' '}
+											<span className=' font-bold'>
+												{' '}
+												{new Date()
+													.toTimeString(data.time_last_updated)
+													.substring(0, 8)}
+											</span>
 										</p>
 									</>
 								)}
@@ -183,7 +192,7 @@ function App() {
 						</div>
 					</div>
 
-					<div className=' w-11/12 sm:w-9/12 mx-auto my-8 border-2 shadow-lg rounded-lg'>
+					<div className=' w-11/12 sm:w-9/12 mx-auto my-12 border-2 shadow-lg rounded-lg'>
 						<p className='text-center text-2xl p-3 text-blue-900 bg-blue-50 mb-5 font-bold'>
 							{' '}
 							Popular conversions{' '}
@@ -196,6 +205,8 @@ function App() {
 							<li className=' p-3 my-3'>USD to NZD</li>
 						</ul>
 					</div>
+
+					<div className='h-1'></div>
 				</div>
 			</div>
 		</div>

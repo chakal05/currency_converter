@@ -481,9 +481,19 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: auto;
 }
 
+.my-5 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
 .my-8 {
   margin-top: 2rem;
   margin-bottom: 2rem;
+}
+
+.my-12 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .my-3 {
@@ -497,6 +507,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .ml-2 {
   margin-left: 0.5rem;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
 }
 
 .mb-5 {
@@ -519,12 +533,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 3rem;
 }
 
-.w-11\/12 {
-  width: 91.666667%;
+.h-1 {
+  height: 0.25rem;
 }
 
-.w-7\/12 {
-  width: 58.333333%;
+.w-11\/12 {
+  width: 91.666667%;
 }
 
 .w-full {
@@ -592,6 +606,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .p-2 {
   padding: 0.5rem;
+}
+
+.p-1 {
+  padding: 0.25rem;
 }
 
 .p-3 {
@@ -693,6 +711,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .sm\:hidden {
     display: none;
+  }
+
+  .sm\:h-80 {
+    height: 20rem;
   }
 
   .sm\:w-36 {
