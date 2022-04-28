@@ -41,8 +41,10 @@ function App() {
 		const theRates = data.rates;
 		const fromRate = theRates[from.currencycode];
 		const toRate = theRates[to.currencycode];
-
-		setTime(new Date().toTimeString(data.time_last_updated).substring(0, 8));
+		const event = new Date();
+		const getTime = event.toTimeString(data.time_last_updated);
+		const timeFormated = getTime.substring(0, 8);
+		setTime(timeFormated);
 		let exchange = (amount / fromRate) * toRate;
 		setResult(exchange.toFixed(2));
 	};
