@@ -24,6 +24,7 @@ function App() {
 	const [result, setResult] = useState('');
 	const [data, setData] = useState({});
 	const [errorMessage, setErrorMessage] = useState('');
+	const [time, setTime] = useState('');
 
 	const getData = async () => {
 		try {
@@ -41,6 +42,7 @@ function App() {
 		const fromRate = theRates[from.currencycode];
 		const toRate = theRates[to.currencycode];
 
+		setTime(new Date().toTimeString(data.time_last_updated).substring(0, 8));
 		let exchange = (amount / fromRate) * toRate;
 		setResult(exchange.toFixed(2));
 	};
@@ -86,7 +88,7 @@ function App() {
 										setResult('');
 										let val = Number(e.target.value);
 										if (val === 0 || isNaN(val)) {
-											setErrorMessage('Please enter valid amount ');
+											setErrorMessage('Please enter valid amount');
 											setAmount(e.target.value);
 										} else {
 											if (val > 0) setAmount(val);
@@ -162,15 +164,8 @@ function App() {
 											{result}
 											<span className=' ml-2 text-3xl'>{to.currencyName} </span>
 										</p>
-										<p className=' text-gray-500 text-lg mt-3'>
-											{' '}
-											Updated:{' '}
-											<span className=' font-bold'>
-												{' '}
-												{new Date()
-													.toTimeString(data.time_last_updated)
-													.substring(0, 8)}
-											</span>
+										<p className=' text-gray-500 font-bold text-lg mt-3'>
+											Updated today at {time}
 										</p>
 									</>
 								)}
@@ -179,11 +174,11 @@ function App() {
 								{' '}
 								<button
 									className={
-										errorMessage
-											? 'bg-blue-200 text-white w-full h-12 sm:w-36 rounded'
-											: 'bg-blue-900 text-white w-full h-12 sm:w-36 rounded hover:bg-blue-700'
+										errorMessage === ''
+											? 'bg-blue-900 text-white w-full h-12 sm:w-36 rounded hover:bg-blue-700'
+											: 'bg-blue-200 text-white w-full h-12 sm:w-36 rounded'
 									}
-									onClick={errorMessage ? '' : convert}
+									onClick={errorMessage === '' ? convert : undefined}
 								>
 									{' '}
 									Convert{' '}
